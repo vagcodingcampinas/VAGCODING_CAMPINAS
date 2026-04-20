@@ -1,0 +1,2710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VAGCODING CAMPINAS - Coding automotivo premium para Volkswagen, Audi, Porsche, grupo VAG e BMW (sob consulta). Personalização e ativação de funções ocultas.">
+<title>VAGCODING CAMPINAS · Coding Automotivo Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  /* ===================== RESET + BASE ===================== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  :root{
+    --bg:#0a0b0d;
+    --bg-2:#111317;
+    --bg-3:#171a1f;
+    --surface:#1a1d23;
+    --surface-2:#22262e;
+    --line:#2a2f38;
+    --line-2:#3a404c;
+    --text:#e8eaed;
+    --text-dim:#9aa0a8;
+    --text-muted:#6b7280;
+    --accent:#ff2d2d;
+    --accent-2:#ff5a1f;
+    --accent-glow:rgba(255,45,45,.35);
+    --success:#22c55e;
+    --warn:#fbbf24;
+    --grad-red:linear-gradient(135deg,#ff2d2d 0%,#ff5a1f 100%);
+    --grad-dark:linear-gradient(180deg,#0a0b0d 0%,#111317 100%);
+    --font-display:'Bebas Neue',sans-serif;
+    --font-body:'Manrope',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --r-sm:6px;
+    --r-md:10px;
+    --r-lg:16px;
+    --shadow:0 10px 30px rgba(0,0,0,.4);
+    --shadow-glow:0 0 0 1px rgba(255,45,45,.35),0 10px 40px rgba(255,45,45,.15);
+  }
+  html,body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(255,45,45,.08) 0%,transparent 50%),radial-gradient(ellipse 60% 40% at 100% 100%,rgba(255,90,31,.05) 0%,transparent 50%)}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  img{max-width:100%;display:block}
+  ::selection{background:var(--accent);color:#fff}
+
+  /* scroll bar */
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:var(--bg-2)}
+  ::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:10px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+  /* ===================== LAYOUT ===================== */
+  .container{width:100%;max-width:1280px;margin:0 auto;padding:0 24px}
+  .container-sm{max-width:900px}
+  section{padding:80px 0;position:relative}
+
+  /* ===================== NAV ===================== */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(10,11,13,.7);border-bottom:1px solid var(--line);transition:all .3s}
+  .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+  .logo{display:inline-flex;align-items:center;gap:14px;transition:opacity .2s}
+  .logo:hover{opacity:.85}
+  .logo-img{height:50px;width:auto;display:block;border-radius:8px;flex-shrink:0}
+  .footer .logo-img{height:62px}
+  .logo-text{display:flex;flex-direction:column;line-height:.9}
+  .logo-text .logo-title{font-family:var(--font-display);font-size:36px;letter-spacing:2px;color:var(--text)}
+  .logo-text .logo-sub{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;color:var(--text-dim);font-weight:400;margin-top:5px}
+  .footer .logo-text .logo-title{font-size:38px}
+  .footer .logo-text .logo-sub{font-size:11px}
+  @media (max-width:480px){
+    .logo-img{height:42px}
+    .logo-text .logo-title{font-size:26px;letter-spacing:1.2px}
+    .logo-text .logo-sub{font-size:9px;letter-spacing:2px}
+  }
+  .nav-links{display:flex;gap:28px;align-items:center;font-size:14px;font-weight:500}
+  .nav-links a{color:var(--text-dim);transition:color .2s;position:relative}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{padding:10px 20px;background:var(--accent);color:#fff !important;border-radius:var(--r-sm);font-weight:600;font-size:13px;letter-spacing:.3px;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+  .nav-cta:hover{background:#ff4545;transform:translateY(-1px);box-shadow:0 6px 20px var(--accent-glow)}
+
+  /* ===================== HERO ===================== */
+  .hero{min-height:100vh;display:flex;align-items:center;position:relative;padding-top:80px;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black 20%,transparent 70%);
+    -webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black 20%,transparent 70%);
+    pointer-events:none
+  }
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+  .hero-tag{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid var(--line-2);border-radius:100px;font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:24px}
+  .hero-tag .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero h1{font-family:var(--font-display);font-size:clamp(56px,8vw,110px);line-height:.92;letter-spacing:-.5px;margin-bottom:24px;font-weight:400}
+  .hero h1 .highlight{background:var(--grad-red);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+  .hero h1 .italic{font-style:italic;font-family:'Times New Roman',serif;font-weight:400;opacity:.9}
+  .hero-lead{font-size:18px;color:var(--text-dim);max-width:520px;margin-bottom:36px;line-height:1.65}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:var(--r-sm);font-weight:600;font-size:14px;letter-spacing:.3px;transition:all .25s;cursor:pointer;border:1px solid transparent}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:#ff4545;transform:translateY(-2px);box-shadow:0 10px 30px var(--accent-glow)}
+  .btn-ghost{background:transparent;border-color:var(--line-2);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-wa{background:#25d366;color:#fff}
+  .btn-wa:hover{background:#20b858}
+
+  /* Hero right side - visual card */
+  .hero-visual{position:relative;height:560px}
+  .hero-card{position:absolute;background:var(--bg-3);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;backdrop-filter:blur(10px);transition:transform .4s}
+  .hero-card-main{top:20px;right:0;width:320px;box-shadow:var(--shadow);transform:rotate(2deg)}
+  .hero-card-secondary{bottom:20px;left:0;width:280px;box-shadow:var(--shadow);transform:rotate(-3deg)}
+  .hero-card-badge{display:inline-block;padding:4px 10px;background:rgba(255,45,45,.12);color:var(--accent);font-family:var(--font-mono);font-size:10px;border-radius:4px;letter-spacing:1.5px;margin-bottom:12px}
+  .hero-card h4{font-family:var(--font-display);font-size:22px;letter-spacing:1px;margin-bottom:6px}
+  .hero-card p{font-size:13px;color:var(--text-dim);margin-bottom:14px}
+  .hero-card-stat{display:flex;justify-content:space-between;font-size:11px;font-family:var(--font-mono);padding:8px 0;border-top:1px solid var(--line)}
+  .hero-card-stat span:first-child{color:var(--text-muted);letter-spacing:1px}
+  .hero-card-stat span:last-child{color:var(--success);font-weight:700}
+
+  .hero-deco{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;border:1px solid var(--line-2);border-radius:50%;opacity:.3;pointer-events:none}
+  .hero-deco::after{content:'';position:absolute;inset:40px;border:1px dashed var(--line-2);border-radius:50%}
+
+  /* ===================== STATS BAR ===================== */
+  .stats{padding:50px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-2)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}
+  .stat-num{font-family:var(--font-display);font-size:54px;line-height:1;color:var(--accent);margin-bottom:6px;letter-spacing:1px}
+  .stat-label{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)}
+
+  /* ===================== COVERAGE BAND ===================== */
+  .coverage{padding:50px 0;position:relative;overflow:hidden}
+  .coverage::before{content:'';position:absolute;inset:0;background-image:
+    radial-gradient(ellipse 40% 50% at 10% 50%,rgba(255,45,45,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 50% at 90% 50%,rgba(255,90,31,.06) 0%,transparent 60%);
+    pointer-events:none
+  }
+  .coverage-band{position:relative;background:linear-gradient(135deg,var(--surface) 0%,var(--bg-3) 100%);border:1px solid var(--line);border-radius:var(--r-lg);padding:40px 48px;display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;overflow:hidden}
+  .coverage-band::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--grad-red)}
+  .coverage-band::after{content:'';position:absolute;top:-50px;right:-50px;width:250px;height:250px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);opacity:.3;pointer-events:none}
+  .coverage-icon-wrap{position:relative;width:84px;height:84px;flex-shrink:0;display:grid;place-items:center}
+  .coverage-icon-wrap::before,.coverage-icon-wrap::after{content:'';position:absolute;inset:0;border:1px solid var(--line-2);border-radius:50%}
+  .coverage-icon-wrap::after{inset:12px;border:1px dashed var(--accent);opacity:.5;animation:rotate 20s linear infinite}
+  @keyframes rotate{to{transform:rotate(360deg)}}
+  .coverage-icon{width:44px;height:44px;background:var(--grad-red);border-radius:50%;display:grid;place-items:center;color:#fff;font-size:20px;box-shadow:0 6px 20px var(--accent-glow);position:relative;z-index:2}
+  .coverage-text h3{font-family:var(--font-display);font-size:32px;letter-spacing:.5px;margin-bottom:8px;line-height:1.05}
+  .coverage-text p{color:var(--text-dim);font-size:15px;line-height:1.55;max-width:640px}
+  .coverage-text strong{color:var(--text);font-weight:600}
+  .coverage-pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .coverage-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid var(--line-2);border-radius:100px;font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--text-dim);text-transform:uppercase}
+  .coverage-pill i{color:var(--accent);font-size:9px}
+  .coverage-cta{flex-shrink:0}
+
+  .section-header{text-align:center;margin-bottom:50px}
+  .section-eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:14px}
+  .section-eyebrow::before,.section-eyebrow::after{content:'';display:inline-block;width:40px;height:1px;background:var(--accent);opacity:.4}
+  .section-title{font-family:var(--font-display);font-size:clamp(40px,5vw,68px);line-height:1;letter-spacing:-.5px;margin-bottom:16px;font-weight:400}
+  .section-lead{font-size:17px;color:var(--text-dim);max-width:640px;margin:0 auto}
+
+  .selector-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:40px;position:relative;overflow:hidden}
+  .selector-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad-red)}
+  .selector-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .selector-field label{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px}
+  .selector-field label span{color:var(--accent)}
+  .selector-select{width:100%;padding:18px 20px;background:var(--bg);border:1px solid var(--line-2);border-radius:var(--r-md);color:var(--text);font-size:15px;font-family:var(--font-body);font-weight:500;appearance:none;-webkit-appearance:none;cursor:pointer;transition:all .2s;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa0a8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 18px center;background-size:18px;padding-right:50px}
+  .selector-select:hover{border-color:var(--line-2)}
+  .selector-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,45,45,.15)}
+  .selector-select:disabled{opacity:.5;cursor:not-allowed}
+
+  /* ===================== RESULT PANEL ===================== */
+  .result-wrap{display:none;margin-top:50px}
+  .result-wrap.active{display:block;animation:fadeUp .6s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .result-layout{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start}
+
+  .car-header{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;margin-bottom:24px;position:relative;overflow:hidden}
+  .car-header::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);opacity:.25;pointer-events:none}
+  .car-brand{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .car-brand i{color:var(--accent)}
+  .car-model{font-family:var(--font-display);font-size:42px;letter-spacing:.5px;margin-bottom:14px;line-height:1}
+  .car-desc{color:var(--text-dim);font-size:15px;max-width:620px}
+
+  /* Packages */
+  .package-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);margin-bottom:24px;overflow:hidden}
+  .package-card.featured{border-color:var(--accent);box-shadow:var(--shadow-glow)}
+  .package-header{padding:24px 30px;background:linear-gradient(90deg,rgba(255,45,45,.08),transparent);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .package-title-wrap h3{font-family:var(--font-display);font-size:28px;letter-spacing:.5px;margin-bottom:4px}
+  .package-title-wrap p{color:var(--text-dim);font-size:13px}
+  .package-price{text-align:right}
+  .package-price .price{font-family:var(--font-display);font-size:38px;color:var(--accent);line-height:1;letter-spacing:.5px}
+  .package-price .price small{font-size:16px;opacity:.7}
+  .package-price .label{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-top:2px}
+  .package-body{padding:24px 30px}
+  .package-check-all{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-md);margin-bottom:16px;font-size:13px;color:var(--text-dim)}
+  .check-all-btn{padding:6px 12px;background:var(--accent);color:#fff;border-radius:var(--r-sm);font-size:12px;font-weight:600;transition:all .15s}
+  .check-all-btn:hover{background:#ff4545}
+  .check-all-btn.active{background:var(--line-2);color:var(--text-dim)}
+  .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  .feat{display:flex;gap:12px;padding:14px;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-md);cursor:pointer;transition:all .2s;position:relative}
+  .feat:hover{border-color:var(--line-2);background:var(--bg-3)}
+  .feat.selected{border-color:var(--accent);background:rgba(255,45,45,.04)}
+  .feat.selected .feat-check{background:var(--accent);border-color:var(--accent)}
+  .feat.selected .feat-check::after{opacity:1;transform:scale(1)}
+  .feat-check{flex-shrink:0;width:20px;height:20px;border:1.5px solid var(--line-2);border-radius:5px;position:relative;transition:all .2s;margin-top:2px}
+  .feat-check::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='20 6 9 17 4 12'%3e%3c/polyline%3e%3c/svg%3e");background-size:70%;background-position:center;background-repeat:no-repeat;opacity:0;transform:scale(.5);transition:all .15s}
+  .feat-content{flex:1;min-width:0}
+  .feat-name{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px;line-height:1.3}
+  .feat-desc{font-size:12px;color:var(--text-muted);line-height:1.45}
+  .feat-price{font-family:var(--font-mono);font-size:12px;color:var(--warn);font-weight:700;margin-top:4px}
+  .feat-badge{position:absolute;top:8px;right:10px;font-family:var(--font-mono);font-size:9px;letter-spacing:1px;color:var(--text-muted);background:var(--bg);padding:2px 6px;border-radius:3px;border:1px solid var(--line)}
+
+  /* Scaled package (SFD style) */
+  .scaled-info{padding:14px 16px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:var(--r-md);margin-bottom:16px;font-size:13px;color:var(--warn);display:flex;gap:12px;align-items:flex-start}
+  .scaled-info i{flex-shrink:0;margin-top:2px}
+
+  /* ===================== SUMMARY SIDEBAR ===================== */
+  .summary{position:sticky;top:100px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+  .summary-header{padding:22px 24px;background:var(--grad-red);color:#fff}
+  .summary-header h3{font-family:var(--font-display);font-size:28px;letter-spacing:1px;line-height:1}
+  .summary-header p{font-size:12px;opacity:.85;margin-top:4px}
+  .summary-body{padding:20px 24px;max-height:320px;overflow-y:auto}
+  .summary-empty{text-align:center;padding:40px 20px;color:var(--text-muted)}
+  .summary-empty i{font-size:36px;margin-bottom:14px;opacity:.3}
+  .summary-empty p{font-size:13px;line-height:1.5}
+  .summary-item{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);gap:12px;font-size:13px}
+  .summary-item:last-child{border-bottom:none}
+  .summary-item-name{flex:1;color:var(--text-dim);line-height:1.4}
+  .summary-item-price{font-family:var(--font-mono);font-weight:700;color:var(--text);white-space:nowrap}
+  .summary-item.pkg .summary-item-name{color:var(--text);font-weight:600}
+  .summary-item.pkg .summary-item-price{color:var(--accent)}
+  .summary-footer{padding:20px 24px;background:var(--bg-2);border-top:1px solid var(--line)}
+  .summary-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+  .summary-total-label{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase}
+  .summary-total-value{font-family:var(--font-display);font-size:44px;color:var(--accent);line-height:1;letter-spacing:.5px}
+  .summary-total-value small{font-size:18px;opacity:.7}
+  .summary-count{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-bottom:18px}
+  .summary-wa{width:100%;padding:16px;background:#25d366;color:#fff;border-radius:var(--r-md);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s}
+  .summary-wa:hover{background:#20b858;transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,.35)}
+  .summary-wa:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+
+  /* ===================== WHY US / PROCESS ===================== */
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+  .feat-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;position:relative;overflow:hidden;transition:all .25s}
+  .feat-card:hover{border-color:var(--line-2);transform:translateY(-4px)}
+  .feat-card-icon{width:50px;height:50px;background:rgba(255,45,45,.1);border-radius:var(--r-md);display:grid;place-items:center;color:var(--accent);font-size:22px;margin-bottom:20px}
+  .feat-card h4{font-family:var(--font-display);font-size:24px;letter-spacing:.5px;margin-bottom:10px}
+  .feat-card p{color:var(--text-dim);font-size:14px;line-height:1.6}
+  .feat-card-num{position:absolute;top:20px;right:24px;font-family:var(--font-display);font-size:70px;color:var(--line);opacity:.6;line-height:1}
+
+  /* ===================== CTA BAND ===================== */
+  .cta-band{background:linear-gradient(135deg,rgba(255,45,45,.1),rgba(255,90,31,.05));border:1px solid rgba(255,45,45,.2);border-radius:var(--r-lg);padding:50px;text-align:center;position:relative;overflow:hidden}
+  .cta-band::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;opacity:.5}
+  .cta-band h2{font-family:var(--font-display);font-size:clamp(36px,5vw,56px);letter-spacing:.5px;margin-bottom:14px;line-height:1}
+  .cta-band p{color:var(--text-dim);font-size:16px;margin-bottom:28px;max-width:540px;margin-left:auto;margin-right:auto}
+
+  /* ===================== FOOTER ===================== */
+  footer{border-top:1px solid var(--line);background:var(--bg-2);padding:60px 0 24px;margin-top:80px}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .footer-col h5{font-family:var(--font-mono);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:10px;font-size:14px;color:var(--text-dim)}
+  .footer-col a{transition:color .2s}
+  .footer-col a:hover{color:var(--accent)}
+  .footer-brand-text{color:var(--text-dim);font-size:14px;line-height:1.65;margin-top:16px;max-width:340px}
+  .footer-socials{display:flex;gap:10px;margin-top:20px}
+  .footer-socials a{width:40px;height:40px;border:1px solid var(--line-2);border-radius:var(--r-sm);display:grid;place-items:center;color:var(--text-dim);transition:all .2s}
+  .footer-socials a:hover{border-color:var(--accent);color:var(--accent);background:rgba(255,45,45,.05)}
+  .footer-contact-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-dim);margin-bottom:12px}
+  .footer-contact-item i{color:var(--accent);margin-top:4px;font-size:14px}
+  .footer-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-muted);flex-wrap:wrap;gap:14px;font-family:var(--font-mono);letter-spacing:.5px}
+
+  /* ===================== MOBILE FAB (summary on mobile) ===================== */
+  .mobile-summary-fab{display:none;position:fixed;bottom:20px;right:20px;left:20px;z-index:90;background:var(--surface);border:1px solid var(--accent);border-radius:var(--r-md);padding:14px 18px;box-shadow:0 10px 30px rgba(0,0,0,.5);align-items:center;justify-content:space-between;gap:16px}
+  .mobile-summary-fab.visible{display:flex}
+  .mobile-summary-fab-left{display:flex;flex-direction:column}
+  .mobile-summary-fab-left small{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:var(--text-muted)}
+  .mobile-summary-fab-left strong{font-family:var(--font-display);font-size:22px;color:var(--accent);letter-spacing:.5px}
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .hero-visual{height:400px;max-width:400px;margin:0 auto}
+    .result-layout{grid-template-columns:1fr}
+    .summary{position:static}
+    .feature-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:30px}
+    .coverage-band{grid-template-columns:1fr;text-align:center;padding:32px 28px;gap:20px}
+    .coverage-icon-wrap{margin:0 auto}
+    .coverage-text p{margin:0 auto}
+    .coverage-pills{justify-content:center}
+  }
+  @media (max-width:720px){
+    section{padding:60px 0}
+    .container{padding:0 18px}
+    .nav-links a:not(.nav-cta){display:none}
+    .selector-grid{grid-template-columns:1fr}
+    .features-grid{grid-template-columns:1fr}
+    .feature-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .selector-wrap{padding:24px}
+    .package-header{padding:20px;flex-direction:column;align-items:flex-start}
+    .package-price{text-align:left}
+    .package-body{padding:20px}
+    .car-header{padding:22px}
+    .car-model{font-size:30px}
+    .cta-band{padding:34px 22px}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+    .stat-num{font-size:42px}
+    .summary{display:none}
+    .summary.visible-mobile{display:block;margin-top:24px}
+    .coverage-band{padding:28px 22px}
+    .coverage-text h3{font-size:26px}
+    .coverage-text p{font-size:14px}
+    .not-listed-grid{grid-template-columns:1fr !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================= NAV ============================= -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo" aria-label="VAGCODING CAMPINAS — Início">
+      <img src="data:image/jpeg;base64,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" alt="VAGCODING CAMPINAS" class="logo-img">
+      <span class="logo-text">
+        <span class="logo-title">VAGCODING</span>
+        <span class="logo-sub">CAMPINAS · SP</span>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#config">Configurador</a>
+      <a href="#porque">Por que nós</a>
+      <a href="#contato">Contato</a>
+      <a href="#contato" class="nav-cta"><i class="fa-brands fa-whatsapp"></i> Orçamento</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================= HERO ============================= -->
+<header id="top" class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag"><span class="dot"></span>Especialistas Grupo VAG · Atendimento no Brasil todo</div>
+        <h1>Seu carro,<br>com <span class="highlight">mais recursos</span><br><span class="italic">ativados.</span></h1>
+        <p class="hero-lead">Coding automotivo premium para Volkswagen, Audi, Porsche e todo o grupo VAG — com atendimento a BMW sob consulta. Ativamos funções ocultas de fábrica, personalizamos iluminação, assistentes de direção, multimídia e muito mais — com diagnóstico seguro e garantia vitalícia do serviço.</p>
+        <div class="hero-ctas">
+          <a href="#config" class="btn btn-primary"><i class="fa-solid fa-gauge-high"></i> Configurar meu carro</a>
+          <a href="#porque" class="btn btn-ghost">Como funciona <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-deco"></div>
+        <div class="hero-card hero-card-main">
+          <span class="hero-card-badge">ATIVO</span>
+          <h4>LANE ASSIST+</h4>
+          <p>Assistente de faixa estendido, sem pedidos de mão no volante por até 10 minutos.</p>
+          <div class="hero-card-stat"><span>STATUS</span><span>●  CODING OK</span></div>
+          <div class="hero-card-stat"><span>MÓDULO</span><span>A5 / CENTRAL</span></div>
+        </div>
+        <div class="hero-card hero-card-secondary">
+          <span class="hero-card-badge">CUSTOMIZADO</span>
+          <h4>LUZ AMBIENTE 30</h4>
+          <p>Paleta de cores completa no console e portas.</p>
+          <div class="hero-card-stat"><span>CORES</span><span>● 30 DISPONÍVEIS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================= STATS ============================= -->
+<section class="stats" style="padding:50px 0">
+  <div class="container">
+    <div class="stats-grid">
+      <div><div class="stat-num">1000+</div><div class="stat-label">CARROS CODIFICADOS</div></div>
+      <div><div class="stat-num">30+</div><div class="stat-label">MODELOS ATENDIDOS</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">GARANTIA VITALÍCIA</div></div>
+      <div><div class="stat-num">5★</div><div class="stat-label">AVALIAÇÃO MÉDIA</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= COVERAGE ============================= -->
+<section class="coverage">
+  <div class="container">
+    <div class="coverage-band">
+      <div class="coverage-icon-wrap">
+        <div class="coverage-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+      </div>
+      <div class="coverage-text">
+        <h3>Atendimento <span style="background:var(--grad-red);-webkit-background-clip:text;background-clip:text;color:transparent">em todo o Brasil</span></h3>
+        <p>Base em <strong>Campinas · SP</strong>, atendimento <strong>a domicílio</strong> sob agendamento, e rede de <strong>parceiros qualificados em diversas regiões do Brasil</strong> — assim conseguimos atender clientes de qualquer estado com o mesmo padrão técnico.</p>
+        <div class="coverage-pills">
+          <span class="coverage-pill"><i class="fa-solid fa-circle"></i>CAMPINAS · SP</span>
+          <span class="coverage-pill"><i class="fa-solid fa-circle"></i>DOMICÍLIO</span>
+          <span class="coverage-pill"><i class="fa-solid fa-circle"></i>PARCEIROS PELO BRASIL</span>
+        </div>
+      </div>
+      <div class="coverage-cta">
+        <a href="https://wa.me/5519999801171?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20se%20voc%C3%AAs%20atendem%20a%20minha%20regi%C3%A3o." target="_blank" rel="noopener" class="btn btn-primary">
+          <i class="fa-brands fa-whatsapp"></i> Consultar disponibilidade
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CONFIGURADOR ============================= -->
+<section id="config">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Configurador de coding</div>
+      <h2 class="section-title">Escolha seu carro,<br>monte seu pacote.</h2>
+      <p class="section-lead">Selecione a marca e o modelo para visualizar todas as funções disponíveis, valores de pacote e itens adicionais. O orçamento é montado em tempo real.</p>
+    </div>
+
+    <div class="selector-wrap">
+      <div class="selector-grid">
+        <div class="selector-field">
+          <label>01 · Marca <span>*</span></label>
+          <select id="brand-select" class="selector-select">
+            <option value="">Selecione a marca…</option>
+          </select>
+        </div>
+        <div class="selector-field">
+          <label>02 · Modelo / Versão <span>*</span></label>
+          <select id="model-select" class="selector-select" disabled>
+            <option value="">Selecione o modelo…</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result area -->
+    <div class="result-wrap" id="result">
+      <div class="result-layout">
+        <div id="result-main">
+          <!-- Car header + packages populated by JS -->
+        </div>
+        <aside>
+          <div class="summary" id="summary">
+            <div class="summary-header">
+              <h3>Seu Orçamento</h3>
+              <p>Atualizado em tempo real</p>
+            </div>
+            <div class="summary-body" id="summary-body">
+              <div class="summary-empty">
+                <i class="fa-solid fa-list-check"></i>
+                <p>Selecione as funções desejadas e acompanhe o orçamento por aqui.</p>
+              </div>
+            </div>
+            <div class="summary-footer">
+              <div class="summary-total">
+                <span class="summary-total-label">Total</span>
+                <span class="summary-total-value"><small>R$</small> <span id="total-value">0</span></span>
+              </div>
+              <div class="summary-count" id="total-count">Nenhum item selecionado</div>
+              <button class="summary-wa" id="wa-btn" disabled>
+                <i class="fa-brands fa-whatsapp"></i> Solicitar via WhatsApp
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= POR QUE NÓS ============================= -->
+<section id="porque" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Por que escolher a VAGCODING SP</div>
+      <h2 class="section-title">Trabalho sério.<br>Sem achismo.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feat-card">
+        <div class="feat-card-num">01</div>
+        <div class="feat-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h4>Garantia Vitalícia</h4>
+        <p>Se a concessionária apagar qualquer codificação em revisão ou troca em garantia, reativamos todas as funções sem custo. Por toda a vida útil do serviço.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-num">02</div>
+        <div class="feat-card-icon"><i class="fa-solid fa-microchip"></i></div>
+        <h4>Diagnóstico Oficial</h4>
+        <p>Trabalhamos com equipamentos profissionais compatíveis com o protocolo da fábrica. Nada de "jeitinho" ou adaptações arriscadas.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-num">03</div>
+        <div class="feat-card-icon"><i class="fa-solid fa-rotate-left"></i></div>
+        <h4>Reversão Completa</h4>
+        <p>Todo coding é reversível. Se quiser voltar à configuração de fábrica, basta nos chamar — retornamos cada módulo ao estado original.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-num">04</div>
+        <div class="feat-card-icon"><i class="fa-solid fa-user-gear"></i></div>
+        <h4>Experiência Real</h4>
+        <p>Centenas de veículos já passaram pela nossa bancada. Conhecemos particularidades por ano, motor e versão.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-num">05</div>
+        <div class="feat-card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+        <h4>Cobertura Nacional</h4>
+        <p>Base em Campinas/SP, atendimento a domicílio sob agendamento e rede de parceiros qualificados em diversas regiões do Brasil — atendemos clientes de qualquer estado.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-num">06</div>
+        <div class="feat-card-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+        <h4>Preço Transparente</h4>
+        <p>Pacote fechado com dezenas de funções pelo mesmo valor. Adicionais com preço informado antes do serviço — sem surpresa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CTA ============================= -->
+<section id="contato">
+  <div class="container container-sm">
+    <div class="cta-band">
+      <div class="section-eyebrow">Agende seu coding</div>
+      <h2>Pronto para liberar o potencial do seu carro?</h2>
+      <p>Fale com nosso time pelo WhatsApp, Instagram ou telefone. Montamos seu orçamento personalizado e agendamos o serviço.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="https://wa.me/5519999801171" target="_blank" rel="noopener" class="btn btn-wa">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp Direto
+        </a>
+        <a href="https://www.instagram.com/vagcoding_campinas" target="_blank" rel="noopener" class="btn btn-ghost">
+          <i class="fa-brands fa-instagram"></i> @vagcoding_campinas
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FOOTER ============================= -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#top" class="logo" aria-label="VAGCODING CAMPINAS — Voltar ao topo">
+          <img src="data:image/jpeg;base64,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" alt="VAGCODING CAMPINAS" class="logo-img">
+          <span class="logo-text">
+            <span class="logo-title">VAGCODING</span>
+            <span class="logo-sub">CAMPINAS · SP</span>
+          </span>
+        </a>
+        <p class="footer-brand-text">Coding automotivo premium para Volkswagen, Audi, Porsche e grupo VAG. Também atendemos BMW sob consulta — diagnóstico seguro e garantia vitalícia do serviço.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/vagcoding_campinas" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/5519999801171" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>NAVEGAÇÃO</h5>
+        <ul>
+          <li><a href="#top">Início</a></li>
+          <li><a href="#config">Configurador</a></li>
+          <li><a href="#porque">Por que nós</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>SERVIÇOS</h5>
+        <ul>
+          <li>Coding VW</li>
+          <li>Coding Porsche</li>
+          <li>Desbloqueio Multimídia</li>
+          <li>Lane Assist / ADAS</li>
+          <li>Iluminação Ambiente</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>CONTATO</h5>
+        <a href="https://wa.me/5519999801171" target="_blank" rel="noopener" class="footer-contact-item" style="transition:color .2s">
+          <i class="fa-brands fa-whatsapp"></i>
+          <div>(19) 99980-1171<br><small style="color:var(--text-muted);font-size:11px">Atendimento 9h–18h</small></div>
+        </a>
+        <a href="https://www.instagram.com/vagcoding_campinas" target="_blank" rel="noopener" class="footer-contact-item" style="transition:color .2s">
+          <i class="fa-brands fa-instagram"></i>
+          <div>@vagcoding_campinas<br><small style="color:var(--text-muted);font-size:11px">Siga e acompanhe os trabalhos</small></div>
+        </a>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>Campinas · SP<br><small style="color:var(--text-muted);font-size:11px">Atendimento local, a domicílio e parceiros pelo Brasil</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VAGCODING CAMPINAS · Todos os direitos reservados</span>
+      <span>FEITO COM <i class="fa-solid fa-wrench" style="color:var(--accent)"></i> EM CAMPINAS</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile FAB -->
+<div class="mobile-summary-fab" id="mobile-fab">
+  <div class="mobile-summary-fab-left">
+    <small>TOTAL</small>
+    <strong>R$ <span id="mobile-total">0</span></strong>
+  </div>
+  <button class="btn btn-wa" id="mobile-wa" style="padding:12px 18px;font-size:13px">
+    <i class="fa-brands fa-whatsapp"></i> Orçar
+  </button>
+</div>
+
+<script>
+/* ============================================================
+   DADOS — extraídos dos PDFs VAGCODING SP
+   ============================================================
+   Estrutura por carro:
+   - descricao: pequena descrição mostrada no cabeçalho
+   - pacotes: array de pacotes. Cada pacote pode ser:
+       - tipo "fixo": preço fixo cobrindo toda uma lista de funções
+       - tipo "escala": preço por grupo de N funções (ex.: "a cada 5 itens R$1500")
+   - adicionais: array de itens extras com preços individuais
+*/
+const DADOS = {
+  "Volkswagen": {
+    "Tiguan/Jetta MK5/TSI/CL (até 2018) · Passat B6 e B7": {
+      descricao: "Pacote tradicional para Tiguan, Jetta MK5, Jetta TSI e CL até 2018 e Passat B6/B7. Ideal para quem quer personalizar sem mexer em sistemas ADAS modernos.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 350,
+          tipo: "fixo",
+          descricao: "Todas as funções abaixo pelo valor único.",
+          funcoes: [
+            {n:"Melhorar o XDS", d:"Carro mais no chão nas curvas (somente TSI)"},
+            {n:"Habilitar botão ASR", d:"Controle de tração (somente TSI, quando instalado)"},
+            {n:"Habilitar Pressão de Pneus", d:"Somente TSI"},
+            {n:"Memória da Recirculação do A/C", d:"Mantém o ajuste ao religar"},
+            {n:"Velocidade do A/C no modo AUTO", d:"Visual da velocidade do ventilador"},
+            {n:"Memória do aquecimento dos bancos", d:"Mantém configuração entre usos"},
+            {n:"Varredura dos Ponteiros", d:"Indicator Celebration (2013+)"},
+            {n:"Litros para encher o tanque", d:"Informação no computador de bordo (2013+)"},
+            {n:"Aviso de portas abertas", d:"Remover OU habilitar nas 4 portas (pós-2014)"},
+            {n:"Trocar tipo de painel colorido", d:"Apenas Jetta TSI 2017/2018"},
+            {n:"Desabilitar aviso de cinto", d:"Remove bip sonoro"},
+            {n:"Aviso de portas com ignição ligada", d:"Desabilitar ou habilitar nas 4 portas"},
+            {n:'Matar a "Portuguesa"', d:'Trocar para mute do rádio (volante 2011–2014)'},
+            {n:"Seta conforto 5 piscadas", d:"De 3 para 5 piscadas"},
+            {n:"Farol automático a 140 km/h", d:"Habilita farol baixo em velocidade"},
+            {n:"Farol automático com limpador", d:"Acende ao ligar o limpador de parabrisa"},
+            {n:'Remover aviso "Safe"', d:"Tira aviso do painel ao desligar"},
+            {n:"Elétrica pós chave removida", d:"Mantém ligada por um tempo"},
+            {n:"Trancar com motor ligado", d:"Obrigatório ter Kessy / chave presença"},
+            {n:"Vidros pelo sensor de chuva", d:"Fecha os vidros se chover (até 2016)"},
+            {n:"Teto solar pela chave", d:"Escolher abertura basculante ou total"},
+            {n:"Pisca alerta em frenagem", d:"Aciona automaticamente em freadas bruscas"},
+            {n:"DRL ativo com seta", d:"Jetta MK6 e Passat B7 pacote Premium"},
+            {n:"DRL com freio de mão solto", d:"Jetta e Passat com DRL de fábrica"},
+            {n:"BIP do alarme", d:"Ativar ao trancar/destrancar"},
+            {n:"DRL pelo milha ou baixo", d:"Quando não for pacote Premium"},
+            {n:"Ligar/desligar DRL no computador", d:"Menu do computador de bordo"},
+            {n:"Coming & Leaving Home automático", d:"Ativação pelo sensor"},
+            {n:"DRL forte na lanterna", d:"Jetta MK6/Passat Premium até 2014"},
+            {n:"Renomear rádio/Bluetooth", d:"Jetta TSI/CL até 2014 com GPS"},
+            {n:"Câmera de ré OEM", d:"Quando instalada no rádio original"},
+            {n:"Rebatimento dos retrovisores", d:"Ao trancar o carro (requer motores)"},
+            {n:"Minimizar puxar pra direita", d:"Somente Jetta TSI e Passat B7"},
+            {n:"Calibrar farol de Xênon", d:"Quando houver módulo específico"}
+          ]
+        },
+        {
+          nome: "Pacote Específico Passat B6/B7 + Jetta MK5",
+          valor: 300,
+          tipo: "fixo",
+          descricao: "Funções exclusivas destes modelos.",
+          funcoes: [
+            {n:"Acionar vidros com 1 toque do alarme", d:"Somente MK5 e Passat"},
+            {n:"Luz traseira Jetta MK5 estilo GTR", d:"Meio da lanterna somente para freio (até 2009)"},
+            {n:"Lanterna e seta conjugadas", d:"Jetta MK5 até 2009 e Passat até 2010"},
+            {n:"Habilitar D1, D2 etc", d:"No Jetta MK5 ou Confortline"}
+          ]
+        }
+      ],
+      adicionais: []
+    },
+
+    "Tiguan Allspace Rline (até 2021)": {
+      descricao: "Linha pré-2021 da Tiguan Allspace Rline. Inclui pacote conforto completo e upgrade opcional para módulo Semi-Autônomo.",
+      pacotes: [
+        {
+          nome: "Pacote Conforto",
+          valor: 550,
+          tipo: "fixo",
+          descricao: "Itens 1 a 39 — conforto, iluminação e multimídia.",
+          funcoes: [
+            {n:"Minimizar Controle de Tração",d:"Carro menos interventivo na arrancada"},
+            {n:"Melhorar Controle do Diferencial",d:'Carro mais no "chão" nas curvas'},
+            {n:"Memória da Recirculação do A/C",d:"Mantém ajuste"},
+            {n:"Velocidade FAN no modo AUTO",d:"Visual da velocidade do ventilador"},
+            {n:"Memória do aquecimento dos bancos",d:"Permanece entre usos"},
+            {n:"Indicator Celebration",d:"Varredura dos ponteiros (somente 2018)"},
+            {n:"Laptimer no painel",d:"Cronômetro integrado"},
+            {n:"Litros para encher o tanque",d:"Cálculo exibido no painel"},
+            {n:'Alterar "Boas Vindas" (2020+)',d:'Personalizar "Bem Vindo VW"'},
+            {n:"Remover aviso de cinto",d:"Tira bip sonoro"},
+            {n:"Aviso de portas",d:"Desativar OU nas 4 portas"},
+            {n:"Alterar layout do painel digital",d:"+logo rline (2020+)"},
+            {n:"Farol automático com limpador",d:"Acende ao chover"},
+            {n:"Farol automático a 140 km/h",d:"Apaga a 65 km/h"},
+            {n:"Remover msg de ligar farol",d:"Tira aviso do painel"},
+            {n:"Coming Home automático",d:"Sem necessidade do botão"},
+            {n:"Seta conforto 5 piscadas",d:"De 3 para 5"},
+            {n:"Pisca alerta em frenagens bruscas",d:"Aciona automaticamente"},
+            {n:"Configuração DRL na multimídia",d:"Menu dedicado"},
+            {n:"DRL após baixar freio de mão",d:"Ativação gradual"},
+            {n:"DRL nas lanternas traseiras",d:"Iluminação contínua"},
+            {n:"Vidros com porta aberta",d:"Funcionam mesmo após desligar"},
+            {n:"Trancar com motor ligado",d:"Pela chave externa"},
+            {n:"Piscar milha junto com farol alto",d:"Sinalização de ultrapassagem"},
+            {n:"Farol de milha no Coming/Leaving Home",d:"Iluminação extra"},
+            {n:"Lanterna traseira ao abrir porta malas",d:"Segurança extra"},
+            {n:"Luz de pé ao abrir porta malas",d:"Iluminação"},
+            {n:"Bip do alarme na multimídia",d:"Exceto Tiguan 2021 (funciona sem menu)"},
+            {n:"Seta piscando mais lenta",d:"Ao trancar/destrancar"},
+            {n:"Abertura total do teto na chave",d:"Com os vidros"},
+            {n:"Acendimento progressivo console",d:"Luzes suaves"},
+            {n:"DLA memorizado",d:"Farol alto automático última posição"},
+            {n:"Luz Ambiente 30 cores",d:"Rline 2020+ seleção automática"},
+            {n:"Abrir vidros na maçaneta",d:"Segurando a maçaneta"},
+            {n:"Start/Stop com luz piscante",d:"Antes de ligar o carro"},
+            {n:"Travamento automático ao fechar porta",d:"Ao sair do carro"},
+            {n:"Reduzir delay do acelerador",d:"Resposta mais imediata"},
+            {n:"Luzes dos retrovisores progressivas",d:"Apagam junto ao rebater"},
+            {n:"School Mode",d:"Modo auto-escola"}
+          ]
+        },
+        {
+          nome: "Pacote Completo Semi-Autônomo",
+          valor: 1100,
+          tipo: "fixo",
+          descricao: "Pacote Conforto + pacote ADAS (Lane Assist, Jam Assist, Emergency Assist, Traffic Sign).",
+          funcoes: [
+            {n:"Tudo do Pacote Conforto",d:"Os 39 itens acima inclusos"},
+            {n:"Lane Assist (>65 km/h)",d:"Centraliza o carro na faixa. Tiguan Rline 2021 guarda memória"},
+            {n:"Jam Assist (<65 km/h)",d:"Lane Assist em baixas velocidades"},
+            {n:"Emergency Assist",d:"Freia automático se motorista desmaia"},
+            {n:"Traffic Sign Assist",d:"Reconhecimento de placas de velocidade"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio vídeo MP4 em movimento (somente 2021)",d:"Via pendrive. Com o coding: R$200. Isolado: R$300",valor:200,valorSozinho:300,requerPacote:true},
+        {n:"Upgrade de qualidade do som",d:"Somente 2018/2019",valor:250},
+        {n:"Fechar porta malas no controle remoto",d:"Somente 2018/2019/2020",valor:250},
+        {n:"Performance Monitor",d:"Pressão do turbo, força G, torque (2018–2020)",valor:600},
+        {n:"Stop & Go estendido",d:"De 3 para 10 segundos sem acelerar",valor:400},
+        {n:"PACC + Reconhecimento de Pedestre",d:"Carro adapta velocidade às placas. Em combo com coding: R$2000",valor:2000}
+      ]
+    },
+
+    "Tiguan Allspace Rline (2024 em diante)": {
+      descricao: "Geração atual da Tiguan Allspace Rline. Pacote completo com todas as personalizações principais.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 550,
+          tipo: "fixo",
+          descricao: "35 funções de conforto, iluminação e dinâmica.",
+          funcoes: [
+            {n:"Minimizar Controle de Tração",d:"Carro menos interventivo"},
+            {n:"Melhorar Diferencial Eletrônico",d:"Mais firme em curvas"},
+            {n:"Memória da Recirculação do A/C",d:""},
+            {n:"Velocidade do ventilador no AUTO",d:""},
+            {n:"Memória do aquecimento dos bancos",d:""},
+            {n:"LapTimer",d:"Cronômetro"},
+            {n:"Litros para encher o tanque",d:""},
+            {n:'Alterar "Boas Vindas"',d:'"Bem Vindo VW"'},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Desativar OU nas 4 portas"},
+            {n:"Alterar tipo/escala do painel",d:""},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 km/h (apaga 65)",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"DRL na multimídia",d:""},
+            {n:"DRL após baixar freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com motor ligado",d:""},
+            {n:"Lanterna ao abrir porta malas",d:""},
+            {n:"Luz de pé ao abrir porta malas",d:""},
+            {n:"Aumentar potência resfriamento bancos",d:""},
+            {n:"Bip do alarme",d:"Sem menu na multimídia"},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"DLA memorizado",d:""},
+            {n:"Luz piscante Start/Stop",d:""},
+            {n:"Travamento automático ao fechar porta",d:""},
+            {n:"Reduzir delay do acelerador",d:""},
+            {n:"Easy Entry automático",d:"Perfis por chave"},
+            {n:"Luzes dos retrovisores progressivas",d:""},
+            {n:"School Mode",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Lane Assist 5min sem mão",d:"Assistente de faixa estendido",valor:600},
+        {n:"Desbloqueio de vídeo MP4 em movimento",d:"Via pendrive",valor:1500}
+      ]
+    },
+
+    "Tiguan Allspace CL": {
+      descricao: "Versão Comfortline da Tiguan Allspace. Pacote completo com mais de 40 personalizações.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 500,
+          tipo: "fixo",
+          descricao: "40 itens de conforto, iluminação e multimídia.",
+          funcoes: [
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Velocidade FAN no AUTO",d:""},
+            {n:"Memória aquecimento bancos",d:""},
+            {n:"Indicator Celebration",d:"Painel analógico"},
+            {n:"Laptimer",d:"Cronômetro"},
+            {n:"Litros para encher o tanque",d:""},
+            {n:'Alterar "Boas Vindas" (2020+)',d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Desativar OU nas 4 portas"},
+            {n:"Layout do painel digital",d:"+logo rline (2020+)"},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 km/h",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"DRL na multimídia",d:""},
+            {n:"DRL após baixar freio",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com motor ligado",d:""},
+            {n:"Luz de freio ao abrir porta malas",d:""},
+            {n:"Piscas traseiros no Coming/Leaving Home",d:""},
+            {n:"Luz de pé ao abrir porta malas",d:""},
+            {n:"Farol de milha no Coming/Leaving Home",d:""},
+            {n:"Bip do alarme na multimídia",d:""},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Seta piscando mais lenta",d:""},
+            {n:"Piscar milha com farol alto",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Memória do Farol Automático",d:""},
+            {n:"Iluminação ambiente 30 cores",d:""},
+            {n:"Travamento ao fechar porta",d:""},
+            {n:"Luz piscante Start/Stop",d:""},
+            {n:"Reduzir delay acelerador",d:""},
+            {n:"Direção mais leve ao estacionar",d:""},
+            {n:"Easy Entry com memória 1,2,3",d:""},
+            {n:"Retrovisores progressivos",d:""},
+            {n:"Modo Offroad na multimídia",d:""},
+            {n:"School Mode na multimídia",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Upgrade qualidade do som",d:"",valor:250},
+        {n:"Performance Monitor",d:"Pressão turbo, força G, torque",valor:600}
+      ]
+    },
+
+    "TAOS (HL e CL)": {
+      descricao: "TAOS em versões Highline e Comfortline (modelos anteriores ao SFD bloqueado). Coding extenso + pacote ADAS opcional.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 500,
+          tipo: "fixo",
+          descricao: "39 itens de conforto, iluminação e dinâmica.",
+          funcoes: [
+            {n:"Desabilitar controle de torque pelo ABS",d:'Carro mais "solto"'},
+            {n:"Diferencial mais forte",d:"Mais no chão em curvas"},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Velocidade FAN no AUTO",d:""},
+            {n:"Memória aquecimento bancos",d:""},
+            {n:"Farol auto 140 (apaga 65)",d:""},
+            {n:"Farol com limpador",d:""},
+            {n:"Barra de LED na grade com DRL",d:"Somente HL"},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Memória do FLA",d:"Farol alto automático (HL)"},
+            {n:"28 cores multimídia/painel",d:"Seleção pela multimídia"},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Teto total na chave/maçaneta",d:"Com Keyless"},
+            {n:"Proteção pró-ativa dos ocupantes",d:""},
+            {n:"Menu bloqueio automático das portas",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"Bip do alarme na multimídia",d:""},
+            {n:"Seta piscando mais lenta",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Vidros e teto pela maçaneta",d:"Com Keyless, dois sensores"},
+            {n:"Laptimer no painel",d:"Somente HL"},
+            {n:"Litros para encher o tanque",d:""},
+            {n:'Alterar "Boas Vindas"',d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Desativar OU nas 4"},
+            {n:"Layout painel 10 polegadas",d:"+logo rline opcional"},
+            {n:"Conta giros horizontal (CL)",d:"Painel 8 polegadas"},
+            {n:"Ângulo de direção (CL)",d:""},
+            {n:"Retrovisores progressivos (HL)",d:""},
+            {n:"Reduzir delay acelerador",d:""},
+            {n:"Sport Monitor na multimídia",d:"Substitui Offroad"},
+            {n:"Ícone ESC na multimídia",d:"Controle de tração na tela"},
+            {n:"Luz piscante Start/Stop",d:""},
+            {n:"Travamento ao fechar porta motorista",d:"Sem rebater retrovisor"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio vídeo em movimento",d:"Via MP4 pendrive. Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Android Auto sem fio (VW PLAY)",d:"Atualização da multimídia. Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Travel Assist (<65 km/h)",d:"Necessita troca dos comandos do volante",valor:400},
+        {n:"Lane Assist 10min (TAOS HL 2023+)",d:"Sem pedir mão no volante",valor:600},
+        {n:"Leitura de placas de velocidade",d:"TAOS HL 2023/24 desbloqueados",valor:1200},
+        {n:"Stop & Go estendido",d:"De 3 para 10 segundos",valor:250}
+      ]
+    },
+
+    "TAOS / Jetta GLI / Tiguan Rline (SFD 2024 pós-maio, 2025/26)": {
+      descricao: "Modelos com SFD bloqueado pela VW (2024 após maio e 2025/26). Pacote reduzido devido a proteção de fábrica, mas com muitos itens disponíveis.",
+      pacotes: [
+        {
+          nome: "Pacote SFD Bloqueado",
+          valor: 550,
+          tipo: "fixo",
+          descricao: "14 itens disponíveis apesar do bloqueio SFD.",
+          funcoes: [
+            {n:"Controle de tração para mais curvas",d:'Carro mais no "chão"'},
+            {n:"Assistente de ladeira (somente TAOS)",d:"Mais suave saindo da rampa"},
+            {n:"ESC Off na multimídia (exceto Tiguan)",d:""},
+            {n:"Recirculação do A/C",d:""},
+            {n:"Velocidade do A/C em automático",d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4 portas"},
+            {n:"Minimizar delay do acelerador (Tiguan)",d:""},
+            {n:"Ícone controle de tração VW PLAY (exceto Tiguan)",d:""},
+            {n:"Sport Monitor VW PLAY (TAOS)",d:""},
+            {n:"Retrovisores progressivos (TAOS/Tiguan)",d:""},
+            {n:"Lane Assist mais centralizado",d:"ADAS"},
+            {n:"Luz pulsante Start/Stop",d:""},
+            {n:"Teto total na chave",d:"Com teto solar"}
+          ]
+        },
+        {
+          nome: "Central Elétrica (a cada 5 itens)",
+          valor: 1500,
+          tipo: "escala",
+          porLote: 5,
+          descricao: "Cada conjunto de 5 itens escolhidos = R$1.500. Itens bloqueados por SFD e liberados manualmente.",
+          funcoes: [
+            {n:"Aumentar potência resfriamento bancos (somente GLI)",d:""},
+            {n:"Menu bloqueio automático das portas",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"DRL dimming com seta (GLI)",d:""},
+            {n:'Seta dianteira como DRL "USA" (GLI/TAOS)',d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Seta piscando mais lenta",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Luz de pé ao abrir porta malas",d:""},
+            {n:'Bigode traseiro "só freio" (GLI)',d:""},
+            {n:"Bip do alarme",d:"Tiguan Rline sem menu"},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Memória farol alto automático",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio vídeo VW PLAY (exceto Tiguan)",d:"Arquivos MP4 no pendrive",valor:450},
+        {n:"Desbloqueio vídeo Tiguan",d:"Acrescentar ao coding",valor:1500},
+        {n:"Android Auto sem fio",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Lane Assist 10min sem mão",d:"Com coding: R$600. Isolado: R$800",valor:600,valorSozinho:800,requerPacote:true},
+        {n:"Som esportivo interno",d:"Com coding: R$200. Isolado: R$350",valor:200,valorSozinho:350,requerPacote:true},
+        {n:"Alterar layout do painel",d:"Personalização visual",valor:1500},
+        {n:"Controle tração menos atuante (arrancada)",d:"",valor:1500}
+      ]
+    },
+
+    "Polo / Virtus / Nivus / Tcross / Tera (SFD 2024 pós-maio, 2025/26)": {
+      descricao: "Hatches e SUVs compactos com SFD bloqueado pela VW. Pacote enxuto porém com boa cobertura de personalização.",
+      pacotes: [
+        {
+          nome: "Pacote SFD Bloqueado",
+          valor: 550,
+          tipo: "fixo",
+          descricao: "18 funções disponíveis apesar do bloqueio SFD.",
+          funcoes: [
+            {n:"Melhorar assistente de ladeira",d:"Mais suave"},
+            {n:"ESC Off na multimídia",d:"Controle de tração"},
+            {n:"Recirculação do A/C",d:""},
+            {n:"Velocidade A/C no automático",d:""},
+            {n:"Recirculação com modo AUTO",d:""},
+            {n:"Comandos A/C na VW PLAY",d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou 4 portas"},
+            {n:"Reduzir delay do acelerador",d:""},
+            {n:"Luz pulsante Start/Stop",d:""},
+            {n:"Desbloqueio câmera de ré",d:"Quando necessário"},
+            {n:"Teto total na chave",d:"Com teto solar"},
+            {n:"Ícone controle de tração VW PLAY",d:""},
+            {n:"Sport Monitor VW PLAY",d:""},
+            {n:"Modo Offroad VW PLAY",d:""},
+            {n:"Lane Assist centralizado",d:"Tcross/Nivus 2025 ADAS"},
+            {n:"Remover msg LANE OFF",d:""},
+            {n:"Memória do Lane Assist",d:""}
+          ]
+        },
+        {
+          nome: "Central Elétrica (a cada 5 itens)",
+          valor: 1500,
+          tipo: "escala",
+          porLote: 5,
+          descricao: "Cada 5 itens selecionados = R$1.500.",
+          funcoes: [
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Monitoramento halógena → LED",d:"Milha, Alto, Baixo e Placa"},
+            {n:"Piscar milha com farol alto",d:""},
+            {n:"Milha no Coming/Leaving Home",d:""},
+            {n:"Alerta luz da porta ligada",d:""},
+            {n:"Piscas retrovisores na ré",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Acender botão do farol",d:"Com portas abertas"},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Fechar cortina teto ao trancar (Tcross)",d:""},
+            {n:"Retrovisor volta só com ignição",d:""},
+            {n:"LED da grade dianteira como DRL",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio vídeo VW PLAY",d:"Arquivos MP4 no pendrive",valor:450},
+        {n:"Android Auto sem fio",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Lane Assist 10min sem mão",d:"Com coding: R$600. Isolado: R$800",valor:600,valorSozinho:800,requerPacote:true},
+        {n:"Lane Assist Polo/Virtus GTS 2024+",d:"Ativação do sistema",valor:1500},
+        {n:"Travel Assist (<65 km/h)",d:"Requer comandos volante touch",valor:1500},
+        {n:"Alterar layout do painel",d:"",valor:1500}
+      ]
+    },
+
+    "Polo / Tcross / Virtus SENSE": {
+      descricao: "Pacote específico para versões SENSE com funções simplificadas — ideal para quem quer o essencial de personalização.",
+      pacotes: [
+        {
+          nome: "Pacote Completo SENSE",
+          valor: 400,
+          tipo: "fixo",
+          descricao: "25 funções de conforto e iluminação.",
+          funcoes: [
+            {n:"Assistente de ladeira mais leve",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Indicator Celebration",d:"Varredura ponteiros (não digital)"},
+            {n:"Laptimer (não digital)",d:""},
+            {n:"Litros para encher o tanque",d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4"},
+            {n:"Coming Home automático",d:"Requer sensor no parabrisa"},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens (2023+)",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Halógena → LED",d:"Milha/Alto/Baixo/Placa"},
+            {n:"Piscar milha com farol alto",d:""},
+            {n:"Desabilitar Corning Light",d:"Luz de curva"},
+            {n:"Alerta luz da porta ligada",d:""},
+            {n:"Piscas retrovisores na ré",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Acender botão do farol com portas abertas",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Reduzir delay do acelerador",d:""},
+            {n:"Direção mais leve ao estacionar",d:"Sem modo de condução"},
+            {n:"Desbloquear câmera na multimídia",d:""},
+            {n:"Pressão de pneus",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Upgrade qualidade do som",d:"",valor:250}
+      ]
+    },
+
+    "Saveiro Extreme (2024/25)": {
+      descricao: "Saveiro Extreme geração atual. Pacote voltado a personalização de iluminação, conforto e comportamento do carro.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 400,
+          tipo: "fixo",
+          descricao: "13 funções exclusivas para a Saveiro Extreme 2024/25.",
+          funcoes: [
+            {n:"1 toque = motorista / 2 toques = 2 portas",d:""},
+            {n:"Remover auto-desbloqueio ao desligar",d:""},
+            {n:"Remover aviso de lâmpada LED da placa",d:""},
+            {n:"Luz de curva no farol de milha",d:""},
+            {n:"Pisca alerta em frenagens bruscas",d:""},
+            {n:"DRL traseiro",d:""},
+            {n:"Coming/Leaving Home nos faróis de milha",d:""},
+            {n:"Remover aviso de lâmpada queimada milha",d:""},
+            {n:"Apagar DRL com freio de mão",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Melhorar assistente de ladeira",d:""},
+            {n:"Desabilitar aviso de cinto",d:""},
+            {n:"Consumo instantâneo no painel",d:""}
+          ]
+        }
+      ],
+      adicionais: []
+    },
+
+    "Amarok": {
+      descricao: "Picape Amarok. Pacote com personalização de iluminação, conforto e dinâmica.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 350,
+          tipo: "fixo",
+          descricao: "19 funções para a Amarok.",
+          funcoes: [
+            {n:"Assistente de ladeira mais suave",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Farol baixo automático a 140 km/h",d:""},
+            {n:"1 toque = motorista / 2 toques = 4 portas",d:""},
+            {n:"Bip do alarme",d:""},
+            {n:"Pisca alerta em frenagens bruscas",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL apaga com seta",d:""},
+            {n:"Remover aviso LED placa e milha",d:""},
+            {n:"DRL nas lanternas traseiras",d:"Incompatível com apagar DRL por freio"},
+            {n:"Alterar duração Coming/Leaving Home",d:"Até 60 segundos"},
+            {n:"Desativar Corning Light",d:"Luz de curva pelo neblina"},
+            {n:"Coming/Leaving Home pelo farol de milha",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Litros para encher o tanque",d:""},
+            {n:"Temperatura de óleo",d:"Somente painel colorido"},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Alterar fundo do painel",d:"Computador de bordo"},
+            {n:"Alterar tom sensor de estacionamento",d:""}
+          ]
+        }
+      ],
+      adicionais: []
+    },
+
+    "Polo / Tcross / Virtus (HL, Exclusive e CL)": {
+      descricao: "Linha Highline, Exclusive e Comfortline do Polo, Tcross e Virtus. Pacote extenso com 48 funções de personalização.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 400,
+          tipo: "fixo",
+          descricao: "48 funções de conforto, iluminação e multimídia.",
+          funcoes: [
+            {n:"Assistente de ladeira mais leve",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Velocidade FAN no AUTO",d:""},
+            {n:"Recirculação com AUTO",d:""},
+            {n:"Indicator Celebration",d:"Painel não digital"},
+            {n:"Laptimer no painel",d:"Não digital / volante novo"},
+            {n:"Litros para encher o tanque",d:""},
+            {n:'Alterar "Boas Vindas" (2020+)',d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4"},
+            {n:"Cor/tipo painel digital 10 polegadas",d:"+logo rline"},
+            {n:"Cor painel digital 8 polegadas",d:"Fixa após escolha"},
+            {n:"Conta giros horizontal (CL)",d:""},
+            {n:"Ângulo de direção (CL)",d:""},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 (apaga 65 ou reduz 100/40)",d:""},
+            {n:"DRL forte em todas as posições",d:"Exceto T-Cross HL Full Led"},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens (2023+)",d:""},
+            {n:"Luz diurna na multimídia",d:"Exceto VW PLAY"},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Halógena → LED",d:"Milha/Alto/Baixo/Placa"},
+            {n:"Piscar milha com farol alto",d:""},
+            {n:"Milha no Coming/Leaving Home",d:""},
+            {n:"Alerta luz da porta ligada",d:""},
+            {n:"Piscas retrovisores na ré",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Acender botão do farol",d:"Portas abertas"},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Fechar cortina teto ao trancar (Tcross)",d:""},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Abertura mais rápida porta malas",d:""},
+            {n:"Retrovisor volta só com ignição",d:""},
+            {n:"Travamento ao fechar porta motorista",d:"Sem rebater"},
+            {n:"Luz piscante Start/Stop",d:""},
+            {n:"Modo Offroad na multimídia",d:""},
+            {n:"Modo Sport VW PLAY",d:"1.0 sem relógio turbina"},
+            {n:"Ícone ESC VW PLAY",d:""},
+            {n:"Modo Auto Escola MIB2",d:"Exceto VW PLAY"},
+            {n:"Trocar cor da MIB",d:"Vermelho"},
+            {n:"Comandos A/C na VW PLAY",d:"A/C digital ou touch"},
+            {n:"Reduzir delay acelerador",d:""},
+            {n:"Direção mais leve ao estacionar",d:"Sem modo condução"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Upgrade qualidade do som",d:"Exceto Beats e VW PLAY",valor:250},
+        {n:"Performance Monitor",d:"Apenas Tcross HL 2019/20",valor:600},
+        {n:"Desbloqueio vídeo VW PLAY",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Android Auto sem fio",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Stop & Go estendido até 0 km/h",d:"Motores 1.0 até 2021",valor:1100}
+      ]
+    },
+
+    "Polo TSI Manual ou TRACK": {
+      descricao: "Polo TSI manual e versão TRACK. Pacote voltado a quem quer performance + personalização.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 400,
+          tipo: "fixo",
+          descricao: "31 funções para o Polo TSI/Track.",
+          funcoes: [
+            {n:"Assistente de ladeira mais leve",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Sugestão ecológica no painel",d:""},
+            {n:"Litros para encher o tanque",d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4"},
+            {n:"Cor do painel",d:"Fixa após escolha"},
+            {n:"Conta giros horizontal (CL)",d:"Painel 8 polegadas"},
+            {n:"Ângulo de direção (CL)",d:""},
+            {n:"DRL forte em todas as posições",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"Luz diurna na multimídia",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Halógena → LED",d:""},
+            {n:"Alerta luz da porta ligada",d:""},
+            {n:"Piscas retrovisores na ré",d:""},
+            {n:"Faróis acendem ao trancar/destrancar",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Acender botão do farol com portas abertas",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Abertura rápida porta malas",d:""},
+            {n:"Reduzir delay acelerador",d:""},
+            {n:"Direção mais leve ao estacionar",d:""},
+            {n:"Modo Offroad VW PLAY",d:""},
+            {n:"Modo Sport VW PLAY",d:"Sem relógio turbina"},
+            {n:"Ícone ESC VW PLAY",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Upgrade qualidade do som",d:"Composition touch ou MIB2",valor:250},
+        {n:"Desbloqueio vídeo VW PLAY",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Android Auto sem fio",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"ESC Off",d:"Controle menos atuante. Com coding: R$100. Isolado: R$150",valor:100,valorSozinho:150,requerPacote:true}
+      ]
+    },
+
+    "Passat B8": {
+      descricao: "Geração B8 do Passat. Pacote completo com opção de módulo Semi-Autônomo (Lane Assist + Jam + Emergency + Traffic Sign).",
+      pacotes: [
+        {
+          nome: "Pacote Conforto",
+          valor: 550,
+          tipo: "fixo",
+          descricao: "41 funções sem pacote ADAS.",
+          funcoes: [
+            {n:"Minimizar Controle de Tração",d:""},
+            {n:"Melhorar Diferencial Eletrônico",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Velocidade FAN no AUTO",d:""},
+            {n:"Memória aquecimento bancos",d:""},
+            {n:"Indicator Celebration",d:""},
+            {n:"LapTimer (exceto 2016)",d:""},
+            {n:"Litros para encher o tanque",d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Desativar ou nas 4"},
+            {n:"Layout do painel digital",d:"Exceto 2016"},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 (apaga 65)",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:"Exceto 2016"},
+            {n:"DRL na multimídia",d:""},
+            {n:"DRL após baixar freio",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Contorno das lanternas traseiras",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com motor ligado",d:""},
+            {n:"Piscar milha com alto",d:""},
+            {n:"Milha no Coming/Leaving Home",d:""},
+            {n:"Lanterna ao abrir porta malas",d:""},
+            {n:"Luz de pé ao abrir porta malas",d:""},
+            {n:"Bip do alarme na multimídia",d:""},
+            {n:"Retrovisor volta só com ignição",d:""},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"DLA memorizado",d:""},
+            {n:"Iluminação ambiente 30 cores",d:"Passat 2018+ por modo; 2016 sem paleta"},
+            {n:"Abrir vidros pela maçaneta",d:""},
+            {n:"Luz piscante Start/Stop",d:"Exceto 2016"},
+            {n:"Travamento ao fechar porta",d:""},
+            {n:"Reduzir delay acelerador",d:""},
+            {n:"Easy Entry automático",d:"Perfis por chave"},
+            {n:"Retrovisores progressivos",d:""},
+            {n:"Modo Offroad na multimídia",d:""},
+            {n:"School Mode na multimídia",d:""}
+          ]
+        },
+        {
+          nome: "Pacote Semi-Autônomo",
+          valor: 1100,
+          tipo: "fixo",
+          descricao: "Pacote Conforto + Lane Assist, Jam, Emergency e Traffic Sign.",
+          funcoes: [
+            {n:"Tudo do Pacote Conforto",d:"41 itens inclusos"},
+            {n:"Lane Assist (>65 km/h)",d:""},
+            {n:"Jam Assist (<65 km/h)",d:""},
+            {n:"Emergency Assist",d:""},
+            {n:"Traffic Sign Assist",d:"Reconhecimento de placas"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio DVD",d:"Com coding: R$200. Isolado: R$350",valor:200,valorSozinho:350,requerPacote:true},
+        {n:"Upgrade qualidade do som",d:"Passat 2017/18/19",valor:250},
+        {n:"PACC + Reconhecimento de Pedestre",d:"Requer troca de radar (não incluso). Em combo: R$2000",valor:2000}
+      ]
+    },
+
+    "Polo e Virtus GTS": {
+      descricao: "Versão esportiva GTS do Polo e Virtus. Pacote completo + opções exclusivas de Lane Assist e som esportivo.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 400,
+          tipo: "fixo",
+          descricao: "41 funções para os modelos GTS.",
+          funcoes: [
+            {n:"Assistente de ladeira mais leve",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Velocidade FAN no AUTO",d:""},
+            {n:"Recirculação com AUTO",d:""},
+            {n:"Laptimer no painel",d:"Volante novo modelo"},
+            {n:"Litros para encher o tanque",d:""},
+            {n:'Alterar "Boas Vindas" (2020+)',d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4"},
+            {n:"Layout painel digital",d:"+logo rline"},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 (apaga 65 ou 100/40)",d:""},
+            {n:"Milha forte em todas posições",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens (2023+)",d:""},
+            {n:"Luz diurna na multimídia",d:"Exceto VW PLAY"},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Barras LED grade dianteira com DRL",d:"Polo 2023+"},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Halógena → LED",d:""},
+            {n:"Piscar milha com alto",d:""},
+            {n:"Milha no Coming/Leaving Home",d:""},
+            {n:"Alerta luz da porta ligada",d:""},
+            {n:"Piscas retrovisores na ré",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Acender botão do farol",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Memória farol dinâmico (2023+)",d:""},
+            {n:"Abertura rápida porta malas",d:""},
+            {n:"Retrovisor volta só com ignição",d:""},
+            {n:"Travamento ao fechar porta",d:""},
+            {n:"Modo Offroad na multimídia",d:""},
+            {n:"Ícone ESC VW PLAY",d:""},
+            {n:"Modo Auto Escola MIB2",d:""},
+            {n:"Trocar cor da MIB para vermelho",d:""},
+            {n:"Comandos A/C na VW PLAY",d:""},
+            {n:"Reduzir delay acelerador",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Upgrade qualidade do som",d:"Exceto Beats e VW PLAY",valor:250},
+        {n:"Desbloqueio vídeo VW PLAY",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Android Auto sem fio",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"ESC Off",d:"Com coding: R$100. Isolado: R$150",valor:100,valorSozinho:150,requerPacote:true},
+        {n:"Lane Assist Polo GTS 2023+",d:"Habilita também Travel Assist (<65). Necessita volante touch",valor:550},
+        {n:"Lane Assist 10min (POLO GTS 2023+)",d:"",valor:600},
+        {n:"Som esportivo interno",d:"Polo e Virtus GTS",valor:250}
+      ]
+    },
+
+    "Nivus (Highline e CL)": {
+      descricao: "Nivus em versões Highline e Comfortline. Pacote completo com dezenas de funções de conforto e iluminação.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 400,
+          tipo: "fixo",
+          descricao: "43 itens para o Nivus.",
+          funcoes: [
+            {n:"Assistente de ladeira mais leve",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Velocidade FAN no AUTO",d:""},
+            {n:"Recirculação com AUTO",d:""},
+            {n:"Indicator Celebration",d:"Painel não digital"},
+            {n:"Laptimer no painel",d:""},
+            {n:"Sugestão ecológica",d:""},
+            {n:"Litros para encher o tanque",d:""},
+            {n:'Alterar "Boas Vindas"',d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4"},
+            {n:"Layout painel 10 polegadas",d:"+logo rline"},
+            {n:"Cor painel 8 polegadas",d:""},
+            {n:"Conta giros horizontal (CL)",d:""},
+            {n:"Ângulo de direção (CL)",d:""},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 (ou 100/40)",d:""},
+            {n:"DRL forte em todas posições",d:""},
+            {n:"Halógena → LED",d:""},
+            {n:"Piscar milha com alto",d:""},
+            {n:"Alerta luz da porta",d:""},
+            {n:"Piscas retrovisores na ré",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Acender botão farol com portas",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Coming/Leaving só com DRL+Milha",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens (2023+)",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"Retrovisor volta só com ignição",d:""},
+            {n:"Travamento ao fechar porta motorista",d:"Sem rebater"},
+            {n:"Luz piscante Start/Stop",d:""},
+            {n:"Modo Offroad na multimídia",d:""},
+            {n:"Modo Sport na multimídia",d:"Sem relógio turbina no 1.0"},
+            {n:"Ícone ESC na multimídia",d:""},
+            {n:"Comandos A/C na VW PLAY",d:""},
+            {n:"Reduzir delay acelerador",d:""},
+            {n:"Direção mais leve ao estacionar",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio vídeo VW PLAY",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Android Auto sem fio",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Stop & Go até 0 km/h (até 2021)",d:"Piloto automático estendido",valor:1100},
+        {n:"ESC Off",d:"Com coding: R$100. Isolado: R$150",valor:100,valorSozinho:150,requerPacote:true}
+      ]
+    },
+
+    "Jetta GLI": {
+      descricao: "Jetta GLI em todas as gerações recentes. Pacote esportivo completo com iluminação e dinâmica.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 500,
+          tipo: "fixo",
+          descricao: "46 funções para o GLI.",
+          funcoes: [
+            {n:"Minimizar Controle de Tração",d:""},
+            {n:"Melhorar Diferencial Eletrônico",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Velocidade FAN no AUTO",d:""},
+            {n:"AIR CARE no menu A/C",d:"Exceto GLI 2022+"},
+            {n:"Litros para encher o tanque",d:""},
+            {n:"Laptimer no painel",d:""},
+            {n:'Alterar "Boas Vindas" (2020+)',d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4"},
+            {n:"Alterar layout do painel",d:""},
+            {n:'Alterar "carro" do ACC para Jetta',d:"2020+"},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 (apaga 65)",d:""},
+            {n:"Potência resfriamento bancos",d:""},
+            {n:"Menu bloqueio automático das portas",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"Luz diurna na central",d:"Exceto GLI 2022+"},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"DRL dimming com seta",d:""},
+            {n:'Seta dianteira como DRL "USA"',d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Seta piscando mais lenta",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Luz de pé ao abrir porta malas",d:""},
+            {n:'Bigode traseiro só como freio',d:""},
+            {n:"Abrir vidros pela maçaneta",d:"Exceto GLI 2022+"},
+            {n:"Iluminação ambiente 30 cores",d:"GLI 2022+ serão 28"},
+            {n:"Bip do alarme",d:"GLI 2021 sem menu"},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Memória farol alto automático",d:""},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Travamento ao fechar porta motorista",d:"Chave externa"},
+            {n:"Luz piscante Start/Stop",d:""},
+            {n:"Modo Offroad na multimídia",d:"Até 2020"},
+            {n:"Modo Auto Escola",d:"Até 2021"},
+            {n:"Atalho controle de tração VW PLAY",d:"GLI 2022+"},
+            {n:"Easy Entry automático",d:"Até 2021"},
+            {n:"Pressão de pneus",d:""},
+            {n:"Proteção pró-ativa dos ocupantes",d:""},
+            {n:"Minimizar delay acelerador",d:"GLI 2023+"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio vídeo (GLI 2021+)",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Android Auto sem fio",d:"Com coding: R$150. Isolado: R$300",valor:150,valorSozinho:300,requerPacote:true},
+        {n:"Som esportivo interno",d:"",valor:250},
+        {n:"Lane Assist 10min (GLI 2023+)",d:"",valor:600},
+        {n:"Leitura de placas (GLI 2023/24 desbloq.)",d:"",valor:1200},
+        {n:"ESC Off bem menos atuante",d:"Com coding: R$250. Isolado: R$400",valor:250,valorSozinho:400,requerPacote:true}
+      ]
+    },
+
+    "Jetta Rline e CL": {
+      descricao: "Jetta nas versões Rline e Comfortline. Pacote completo de personalização.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 500,
+          tipo: "fixo",
+          descricao: "44 funções para Jetta Rline/CL.",
+          funcoes: [
+            {n:"Minimizar Controle de Tração",d:""},
+            {n:"Melhorar Diferencial Eletrônico",d:""},
+            {n:"Memória Recirculação A/C",d:""},
+            {n:"Velocidade FAN no AUTO",d:""},
+            {n:"AIR CARE no menu A/C",d:""},
+            {n:"Litros para encher o tanque",d:""},
+            {n:"Indicator Celebration",d:"Não digital"},
+            {n:"Laptimer no painel",d:""},
+            {n:'Alterar "Boas Vindas" (2020+)',d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4"},
+            {n:"Tipo/cor painel digital",d:"+logo rline"},
+            {n:'"Carro" do ACC para Jetta',d:"ACC 2020+"},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 (apaga 65)",d:""},
+            {n:"Menu bloqueio automático das portas",d:""},
+            {n:"Remover msg ligar farol",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"Luz diurna na central",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"DRL dianteiro forte",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Halógena → LED",d:""},
+            {n:"Seta piscando mais lenta",d:""},
+            {n:"Piscar milha com alto",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Luz de pé ao abrir porta malas",d:""},
+            {n:'Bigode traseiro só como freio',d:""},
+            {n:"Abrir vidros pela maçaneta",d:""},
+            {n:"Iluminação ambiente 30 cores",d:"+ alteração por modo"},
+            {n:"Bip do alarme na multimídia",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Memória farol alto automático",d:""},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Travamento ao fechar porta motorista",d:""},
+            {n:"Luz piscante Start/Stop",d:""},
+            {n:"Modo Offroad",d:"Com GPS nativo"},
+            {n:"Modo Auto Escola",d:""},
+            {n:"Pressão de pneus",d:""},
+            {n:"Proteção pró-ativa dos ocupantes",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Upgrade qualidade do som",d:"",valor:250},
+        {n:"Performance Monitor (Jetta Rline)",d:"Pressão turbo, força G, torque",valor:600}
+      ]
+    }
+  },
+
+  "Audi": {
+    "A1": {
+      descricao: "Audi A1. Pacote enxuto de personalização essencial.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 350,
+          tipo: "fixo",
+          descricao: "14 funções essenciais para o A1.",
+          funcoes: [
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Farol baixo automático a 140 km/h",d:""},
+            {n:"1 toque motorista / 2 toques 4 portas",d:"Abertura diferenciada pela chave"},
+            {n:"Remover mensagem Safe do painel",d:"Ao desligar"},
+            {n:"BIP do alarme",d:"Ao trancar/destrancar"},
+            {n:"Coming/Leaving Home pelo farol baixo ou milha",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"Luz de curva pelo farol de milha",d:""},
+            {n:"DRL apaga com seta",d:""},
+            {n:"Pisca alerta em frenagens bruscas",d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Indicator Celebration",d:"Varredura dos ponteiros"},
+            {n:"Reduzir delay do acelerador",d:""},
+            {n:"Direção mais leve ao manobrar",d:""}
+          ]
+        }
+      ],
+      adicionais: []
+    },
+
+    "A3, S3, RS3 (MQB)": {
+      descricao: "Linha A3, S3 e RS3 plataforma MQB. Um dos pacotes mais extensos da marca, com 44 funções.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 450,
+          tipo: "fixo",
+          descricao: "44 funções de conforto, iluminação e dinâmica.",
+          funcoes: [
+            {n:"Indicator Celebration",d:"Varredura dos ponteiros, não digital"},
+            {n:"Laptimer no painel",d:"Cronômetro"},
+            {n:"Layout do painel",d:"RedZone no conta-giros"},
+            {n:"Números ímpares no velocímetro",d:""},
+            {n:"Temperatura do óleo",d:"Menu do computador de bordo"},
+            {n:"Visual do sensor traseiro na ré",d:"Até 2016"},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Remover ou nas 4"},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 km/h",d:""},
+            {n:"Coming Home automático",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"Intensidade DRL com farol ligado",d:""},
+            {n:"Intensidade DRL só com farolete",d:""},
+            {n:"Intensidade DRL com seta",d:""},
+            {n:"Piscar milha com farol alto",d:""},
+            {n:"Remover neblina automático ao destravar",d:""},
+            {n:"Desabilitar Corning Light",d:"Luz de curva"},
+            {n:"Luz diurna na central",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Halógena → LED (painel)",d:"Milha/Alto/Baixo/Placa"},
+            {n:"Neblina traseira ao pisar no freio",d:""},
+            {n:"LEDs de seta traseiros alternados",d:"Seta pinheirinho"},
+            {n:"Milha dianteiro na ré",d:""},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Luz de pé ao abrir porta malas",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Bip do alarme na central",d:""},
+            {n:"Confirmação visual do fechamento",d:"Janelas/teto"},
+            {n:"Modo de serviço para palhetas",d:""},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Abrir vidros pela maçaneta",d:"Com Kessy"},
+            {n:"Desativar Start/Stop definitivo",d:""},
+            {n:"Tilt-down do retrovisor do passageiro",d:"Na ré, requer rebatimento"},
+            {n:"Luzes dos retrovisores progressivas",d:""},
+            {n:"Travamento ao fechar porta motorista",d:""},
+            {n:"Luz piscante Start/Stop",d:"Testar"},
+            {n:"Reduzir delay acelerador",d:""},
+            {n:"Pressão de pneus",d:""},
+            {n:"Desabilitar controle de tração",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Upgrade qualidade do som",d:"Modelos 2016+",valor:250},
+        {n:"Desbloqueio do DVD",d:"Com coding: R$200. Isolado: R$350",valor:200,valorSozinho:350,requerPacote:true},
+        {n:"Painel Sport (RS3)",d:"Personalização esportiva do painel",valor:800}
+      ]
+    },
+
+    "A3 (2021 em diante)": {
+      descricao: "Audi A3 geração atual (2021+). Painel digital moderno com opções avançadas de personalização.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 850,
+          tipo: "fixo",
+          descricao: "16 funções para o A3 geração atual.",
+          funcoes: [
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Emergency Brake",d:"Pisca alerta em frenagens"},
+            {n:"Bip do alarme na central",d:""},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Reduzir delay acelerador",d:""},
+            {n:"Indicator Celebration",d:"Varredura dos ponteiros"},
+            {n:"Laptimer no painel",d:"Cronômetro"},
+            {n:"Força G no painel",d:"Testar por carro - depende de sensores"},
+            {n:"Torque e Potência no painel",d:"Testar por carro"},
+            {n:"Números fracionados no velocímetro",d:""},
+            {n:"Remover aviso visual e sonoro de cinto",d:""},
+            {n:"Leaving Sound",d:"Som ao desligar e sair do carro"},
+            {n:"Coming Sound",d:"Som ao ligar o carro"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Ativação Lane Assist (2023+)",d:"Requer ACC de fábrica. Com coding: R$500. Isolado: R$650",valor:500,valorSozinho:650,requerPacote:true},
+        {n:"Apple CarPlay + Android Auto sem fio",d:"Com coding: R$450. Isolado: R$600",valor:450,valorSozinho:600,requerPacote:true},
+        {n:"Desbloqueio vídeo MP4 em movimento",d:"Com coding: R$300. Isolado: R$500",valor:300,valorSozinho:500,requerPacote:true},
+        {n:"Lanternas Matrix",d:"Efeito matrix ao travar/destravar",valor:350}
+      ]
+    },
+
+    "A4, S4, RS4 (antigo)": {
+      descricao: "Linha A4, S4 e RS4 pré-B9. Extenso pacote com 28 itens de personalização.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 450,
+          tipo: "fixo",
+          descricao: "28 funções para A4/S4/RS4 antigo.",
+          funcoes: [
+            {n:"Seleção de marchas no painel",d:"D1, D2…S1, S2…"},
+            {n:'Desativar "última limpeza" do limpador',d:""},
+            {n:"DRL alternativo",d:"Setas, farol alto, neblina, traseira"},
+            {n:"DRL dianteiro ligado com seta",d:""},
+            {n:"Desligar DRL na multimídia",d:""},
+            {n:"Luz de curva pelo milha/neblina",d:""},
+            {n:"Desabilitar DRL dianteiro com seta",d:""},
+            {n:'Remover aviso "luzes acesas"',d:"Ao abrir porta motorista"},
+            {n:"Intercalar alto com milha",d:"Ao acionar farol alto"},
+            {n:"Faróis baixos sempre ligados",d:""},
+            {n:"Luzes estacionamento padrão Euro",d:"Testar"},
+            {n:"Seta laranja de canto",d:"Habilitar/desabilitar padrão USA"},
+            {n:"Seta laranja como lanterna",d:""},
+            {n:"Tempo e ciclos do lavador de faróis",d:""},
+            {n:"Velocidade p/ desligar sensor estac.",d:""},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Indicator Celebration",d:"Varredura dos ponteiros"},
+            {n:"Laptimer no painel",d:"Testar"},
+            {n:"Programa de Eficiência",d:"Modelos 2010+"},
+            {n:"Vidros e teto pelo controle",d:"Fechamento pressionado"},
+            {n:"Pisca alerta em frenagens bruscas",d:""},
+            {n:"Bip duplo ao destravar",d:""},
+            {n:"Tilt-down do retrovisor direito",d:""},
+            {n:"Soltar freio de mão sem pé no freio",d:""},
+            {n:"Liberar freio de mão sem cinto",d:""},
+            {n:"Medidor de bateria na multimídia",d:""},
+            {n:"Velocidade na multimídia",d:"Testar"},
+            {n:"Pressão de pneus",d:"Testar"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio do DVD",d:"Com coding: R$200. Isolado: R$350",valor:200,valorSozinho:350,requerPacote:true},
+        {n:"Modos de Condução",d:"Quando existir o botão físico",valor:200}
+      ]
+    },
+
+    "A4/S4, A5/S5, RS5, Q5 (B9)": {
+      descricao: "Plataforma B9 — A4, S4, A5, S5, RS5 e Q5. Dois níveis de pacote, com ou sem Lane Assist + Jam Assist.",
+      pacotes: [
+        {
+          nome: "Pacote Base",
+          valor: 500,
+          tipo: "fixo",
+          descricao: "28 funções sem Lane Assist e Jam Assist.",
+          funcoes: [
+            {n:"Trancar com ignição ligada",d:""},
+            {n:"Tilt-down do retrovisor direito na ré",d:"Requer motor de rebatimento"},
+            {n:'Desativar auto-desbloqueio no "P"',d:""},
+            {n:"Pisca alerta em frenagens bruscas",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Rebatimento dos retrovisores na chave",d:""},
+            {n:"Abertura automática ao se aproximar",d:"Até 2018, testar"},
+            {n:"Bip do alarme",d:""},
+            {n:"Luzes do teto ao abrir qualquer porta",d:"Acendimento total"},
+            {n:"Velocidade p/ desligar sensor estac.",d:""},
+            {n:"Lanternas traseiras como DRL",d:"Sempre ligadas"},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"Farol alto automático",d:"Quando houver hardware"},
+            {n:"Desligar DRL pela multimídia",d:""},
+            {n:"D1, D2…S1, S2… no painel",d:"Se não visível"},
+            {n:"Easy Entry dos bancos",d:"Testar"},
+            {n:"Freio de mão automático ao desligar",d:""},
+            {n:"Desabilitar Start/Stop",d:"Testar"},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Varredura dos ponteiros",d:""},
+            {n:"Laptimer no painel",d:"Cronômetro"},
+            {n:"Layout do painel - RedZone",d:"Testar carro a carro"},
+            {n:"Welcome Sound",d:"Som ao ligar e desligar"},
+            {n:"Desabilitar AM da multimídia",d:"Somente MIB2"},
+            {n:"Segundo celular no Bluetooth",d:"Somente MIB2"},
+            {n:"Abertura total do teto na chave",d:'Segurando "abrir"'},
+            {n:"Lane Assist",d:"Requer câmera frontal - incluído no pacote Semi-Autônomo"},
+            {n:"JAM Assist",d:"Testar - incluído no pacote Semi-Autônomo"}
+          ]
+        },
+        {
+          nome: "Pacote Semi-Autônomo",
+          valor: 950,
+          tipo: "fixo",
+          descricao: "Pacote Base + Lane Assist e JAM Assist ativados.",
+          funcoes: [
+            {n:"Tudo do Pacote Base",d:"Todas as 28 funções inclusas"},
+            {n:"Lane Assist ativado",d:"Leitor de faixas"},
+            {n:"JAM Assist ativado",d:"Em baixa velocidade"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio DVD (até 2020)",d:"Com coding: R$200. Isolado: R$350",valor:200,valorSozinho:350,requerPacote:true},
+        {n:"Desbloqueio vídeo MP4 (2021+)",d:"Com coding: R$350. Isolado: R$450",valor:350,valorSozinho:450,requerPacote:true},
+        {n:"Painel Sport (RS) até 2020",d:"Personalização esportiva",valor:800},
+        {n:"Apple CarPlay + Android Auto sem fio",d:"Somente modelos 2021+",valor:500}
+      ]
+    },
+
+    "A6 2.0T 252CV (2016)": {
+      descricao: "Audi A6 2.0T geração 2016. Pacote enxuto com foco em conforto e multimídia.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 400,
+          tipo: "fixo",
+          descricao: "7 funções essenciais.",
+          funcoes: [
+            {n:"Recirculação do ar condicionado",d:""},
+            {n:"Farol baixo automático a 140 km/h",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL na MMI (multimídia)",d:""},
+            {n:"DRL apaga com seta",d:""},
+            {n:"Coming/Leaving Home pelo milha",d:""},
+            {n:"Remover aviso de cinto",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio do DVD",d:"Com coding: R$200. Isolado: R$350",valor:200,valorSozinho:350,requerPacote:true},
+        {n:"Apple CarPlay + Android Auto",d:"Inclui coding e desbloqueio DVD",valor:1600},
+        {n:"GPS + CarPlay + Android Auto + Coding + DVD",d:"Pacote completo",valor:2000}
+      ]
+    },
+
+    "Q3 (até 2019)": {
+      descricao: "Audi Q3 geração anterior (até 2019). Pacote focado em iluminação e conforto.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 400,
+          tipo: "fixo",
+          descricao: "18 funções para o Q3 até 2019.",
+          funcoes: [
+            {n:"Indicator Celebration",d:"Varredura dos ponteiros, não digital"},
+            {n:"Laptimer no painel",d:"Cronômetro - testar"},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Visual do sensor traseiro na ré",d:"Até 2016"},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Farol auto 140 km/h",d:""},
+            {n:"1 toque motorista / 2 toques 4 portas",d:""},
+            {n:"Vidros com ignição desligada",d:"Testar"},
+            {n:"Bip do alarme",d:""},
+            {n:"Corning Light no farol de milha",d:"Luz de curva"},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"Desligar DRL pela multimídia",d:""},
+            {n:"Pisca alerta em frenagens",d:""},
+            {n:"Rebatimento dos retrovisores pela chave",d:""},
+            {n:"Tilt-down do retrovisor do passageiro",d:"Na ré"},
+            {n:"Compensação de torque",d:"Evita puxar para os lados"},
+            {n:"Fechamento porta malas pela chave",d:"Até 2017"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio do DVD",d:"Com coding: R$200. Isolado: R$350",valor:200,valorSozinho:350,requerPacote:true}
+      ]
+    },
+
+    "Q3 (2020 em diante)": {
+      descricao: "Audi Q3 geração atual (2020+). Pacote completo com suporte a SFD bloqueado (modelos finais de 2024+).",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 500,
+          tipo: "fixo",
+          descricao: "25 funções. Modelos com SFD bloqueado (final de 2024+) têm acréscimo de R$150.",
+          funcoes: [
+            {n:"Blocante eletrônico mais forte",d:"Médio para forte - carro mais no chão"},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Aviso de portas",d:"Desligar ou nas 4 portas"},
+            {n:"Indicator Celebration",d:"Varredura dos ponteiros"},
+            {n:"Laptimer no painel",d:"Testar"},
+            {n:"Farol auto 140 km/h",d:""},
+            {n:"Farol auto com limpador",d:""},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"Vidros com porta aberta",d:""},
+            {n:"Trancar com motor ligado",d:"Por fora ou por dentro"},
+            {n:"DRL nas lanternas traseiras",d:""},
+            {n:"Lanterna e brake ao abrir porta malas",d:""},
+            {n:"Acendimento progressivo console",d:""},
+            {n:"Bip do alarme com menu na multimídia",d:""},
+            {n:"Seta piscando mais lenta",d:""},
+            {n:"Abertura total do teto na chave",d:""},
+            {n:"Memória do FLA",d:"Se possuir sensor"},
+            {n:"Farol Alto Automático",d:"Requer câmera frontal"},
+            {n:"Abrir vidros pela maçaneta",d:"Com Kessy - 2021+"},
+            {n:"Luz piscante Start/Stop",d:""},
+            {n:"Travamento ao fechar porta motorista",d:""},
+            {n:"Minimizar delay do acelerador",d:""},
+            {n:"Torque e HP no painel",d:"Somente RSQ3"},
+            {n:"Medição 0-100 e 100-200",d:"Testar"},
+            {n:"Welcome Sound na multimídia",d:"Ao ligar e desligar"}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Acréscimo SFD bloqueado (2024+)",d:"Somar quando carro tem SFD",valor:150},
+        {n:"Desbloqueio vídeo MP4 (2021+)",d:"Com coding: R$350. Isolado: R$450. SFD: +R$150 se não fizer coding",valor:350,valorSozinho:450,requerPacote:true},
+        {n:"Apple CarPlay + Android Auto sem fio (2022+)",d:"SFD: +R$150 se não fizer coding",valor:500}
+      ]
+    },
+
+    "Q8": {
+      descricao: "Audi Q8. Pacote premium com todos os principais recursos da geração.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 500,
+          tipo: "fixo",
+          descricao: "15 funções para o Q8.",
+          funcoes: [
+            {n:"Laptimer no painel",d:"Cronômetro"},
+            {n:"Indicator Celebration",d:"Varredura dos ponteiros"},
+            {n:"Remover aviso de cinto",d:""},
+            {n:"Números intermediários no velocímetro",d:""},
+            {n:"Força G no painel",d:"Necessita testar"},
+            {n:"Pressão de turbina e torque no painel",d:"Necessita testar"},
+            {n:"Ligar/desligar DRL na multimídia",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"DRL na traseira do carro",d:"Lanterna traseira sempre ligada"},
+            {n:"Leaving Sound ao sair do carro",d:""},
+            {n:"Auto-desbloqueio das portas ao desligar",d:""},
+            {n:"Duplo beep do alarme ao destravar",d:""},
+            {n:"Freio de mão automático ao desligar",d:""},
+            {n:"Assistente de ladeira mais suave",d:""},
+            {n:"Abertura total do teto na chave",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio vídeo MP4 em movimento",d:"Com coding: R$350. Isolado: R$450",valor:350,valorSozinho:450,requerPacote:true}
+      ]
+    },
+
+    "TT / TTS / TTRS": {
+      descricao: "Linha Audi TT completa — TT, TTS e TTRS. Pacote extenso com funções exclusivas para as versões esportivas.",
+      pacotes: [
+        {
+          nome: "Pacote Completo",
+          valor: 500,
+          tipo: "fixo",
+          descricao: "27 funções para TT/TTS/TTRS.",
+          funcoes: [
+            {n:"Válvula de escape sempre aberta",d:"Somente TTRS"},
+            {n:"Visual de estacionamento no painel",d:"Lado esquerdo ao engatar ré"},
+            {n:"Tilt-down do retrovisor passageiro",d:"Na ré"},
+            {n:"Varredura dos ponteiros",d:"Indicator Celebration"},
+            {n:"Laptimer no painel",d:"Cronômetro"},
+            {n:"Remover bip de portas com ignição",d:""},
+            {n:"Remover aviso de cinto",d:"Som e símbolo"},
+            {n:"Red zone no conta-giros + logos TTs/TTrs",d:"Ao desligar o carro"},
+            {n:"Medidor de força G",d:"Somente TTRS"},
+            {n:"Torque e Power Graph",d:"Somente TTRS"},
+            {n:"Seta conforto 5 piscadas",d:""},
+            {n:"DRL ligado com seta",d:""},
+            {n:"DRL pela multimídia",d:""},
+            {n:"DRL apaga com freio de mão",d:""},
+            {n:"Memória do FLA",d:"Assistente de farol"},
+            {n:"Luzes de emergência em frenagens",d:""},
+            {n:"Coming/Leaving Home sem farol baixo",d:"Apenas DRL"},
+            {n:"Bip do alarme",d:"Fechamento/abertura"},
+            {n:"Piscar seta ao trancar na chave",d:""},
+            {n:"Vidros com ignição desligada e porta aberta",d:""},
+            {n:"Intensidade de LED ao ligar farol baixo",d:"Aumentar"},
+            {n:"Luzes traseiras e brake ao abrir porta malas",d:""},
+            {n:"Brake Light central como DRL",d:""},
+            {n:"Trancar com motor ligado",d:""},
+            {n:"Posição de serviço dos limpadores",d:"Na multimídia"},
+            {n:"Desativar Start/Stop",d:""},
+            {n:"Reduzir delay do acelerador",d:""}
+          ]
+        }
+      ],
+      adicionais: [
+        {n:"Desbloqueio DVD em movimento",d:"Com coding: R$200. Isolado: R$350",valor:200,valorSozinho:350,requerPacote:true},
+        {n:"Apple CarPlay + Android Auto",d:"Ativação completa",valor:1600},
+        {n:"GPS + CarPlay + Android Auto + Coding + DVD",d:"Pacote máximo",valor:2100},
+        {n:"Painel Sport TTRS",d:"Personalização esportiva do painel",valor:800}
+      ]
+    }
+  },
+
+  "BMW": {
+    "__especial__": {
+      tipoEspecial: "bmw",
+      descricao: "Atendemos BMW sob consulta. Cada chassi tem particularidades que variam conforme o modelo, ano e versão — por isso o orçamento é montado caso a caso."
+    }
+  },
+
+  "Porsche": {
+    "Multimídia (Alpine / Harman)": {
+      sobConsulta: true,
+      descricao: "Desbloqueios e ativações na multimídia Porsche — Alpine (tela grande) e Harman (tela pequena 2016–2020). Valores variam conforme modelo, ano e versão do software.",
+      servicosInformativos: [
+        {n:"Desbloqueio Tela FULL",d:"Imagem por inteiro na multimídia (Alpine tela grande)"},
+        {n:"Conexão sem fio Apple CarPlay",d:"Multimídia Alpine 2019/2020+ (varia pela versão de software)"},
+        {n:"Desbloqueio de vídeo em movimento",d:"Exclusivamente para arquivos MP4 em pendrive"},
+        {n:"Ativação Apple CarPlay + Android Auto",d:"Carros 2016–2020 com Harman (tela pequena)"}
+      ]
+    }
+  }
+};
+
+/* ============================================================
+   APP LOGIC
+   ============================================================ */
+const brandSelect = document.getElementById('brand-select');
+const modelSelect = document.getElementById('model-select');
+const resultWrap = document.getElementById('result');
+const resultMain = document.getElementById('result-main');
+const summaryBody = document.getElementById('summary-body');
+const totalValue = document.getElementById('total-value');
+const totalCount = document.getElementById('total-count');
+const waBtn = document.getElementById('wa-btn');
+const mobileFab = document.getElementById('mobile-fab');
+const mobileTotal = document.getElementById('mobile-total');
+const mobileWa = document.getElementById('mobile-wa');
+
+// Contact info — EDITE AQUI para atualizar telefone/links
+const CONTATO = {
+  whatsapp: '5519999801171',  // WhatsApp oficial: (19) 99980-1171
+  instagram: 'https://www.instagram.com/vagcoding_campinas'
+};
+
+// Application state
+let state = {
+  brand: null,
+  model: null,
+  selecoes: new Map() // key = "pkg:idx:type" => {nome, valor, tipo}
+};
+
+// Populate brands
+function populateBrands() {
+  // Sort alphabetically for better UX
+  Object.keys(DADOS).sort().forEach(brand => {
+    const opt = document.createElement('option');
+    opt.value = brand;
+    opt.textContent = brand;
+    brandSelect.appendChild(opt);
+  });
+}
+
+// Populate models for selected brand
+function populateModels(brand) {
+  modelSelect.innerHTML = '<option value="">Selecione o modelo…</option>';
+  if (!brand || !DADOS[brand]) {
+    modelSelect.disabled = true;
+    return;
+  }
+  Object.keys(DADOS[brand]).forEach(model => {
+    const opt = document.createElement('option');
+    opt.value = model;
+    opt.textContent = model;
+    modelSelect.appendChild(opt);
+  });
+  // Add "not listed" option for Audi and Volkswagen only
+  if (brand === 'Audi' || brand === 'Volkswagen') {
+    const sep = document.createElement('option');
+    sep.disabled = true;
+    sep.textContent = '──────────';
+    modelSelect.appendChild(sep);
+    const opt = document.createElement('option');
+    opt.value = '__not_listed__';
+    opt.textContent = 'Meu carro não está na lista';
+    modelSelect.appendChild(opt);
+  }
+  modelSelect.disabled = false;
+}
+
+// Format BRL
+function brl(v) {
+  return v.toLocaleString('pt-BR');
+}
+
+// Escape HTML
+function esc(s) {
+  return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// Render car details
+function renderCar(brand, model) {
+  const car = DADOS[brand][model];
+  let html = `
+    <div class="car-header">
+      <div class="car-brand"><i class="fa-solid fa-car"></i> ${esc(brand)}</div>
+      <h2 class="car-model">${esc(model)}</h2>
+      <p class="car-desc">${esc(car.descricao)}</p>
+    </div>
+  `;
+
+  car.pacotes.forEach((pkg, pkgIdx) => {
+    const featured = pkgIdx === 0 ? 'featured' : '';
+    const valorLabel = pkg.tipo === 'escala' 
+      ? `a cada ${pkg.porLote} itens`
+      : pkg.tipo === 'avulso' 
+      ? 'avulso'
+      : 'pacote fechado';
+
+    html += `
+      <div class="package-card ${featured}">
+        <div class="package-header">
+          <div class="package-title-wrap">
+            <h3>${esc(pkg.nome)}</h3>
+            <p>${esc(pkg.descricao || '')}</p>
+          </div>
+          ${pkg.valor > 0 ? `
+            <div class="package-price">
+              <div class="price"><small>R$</small> ${brl(pkg.valor)}</div>
+              <div class="label">${valorLabel}</div>
+            </div>
+          ` : ''}
+        </div>
+        <div class="package-body">
+    `;
+
+    if (pkg.tipo === 'fixo' && pkg.funcoes.length > 0) {
+      html += `
+        <div class="package-check-all">
+          <span><i class="fa-solid fa-circle-info" style="margin-right:6px;color:var(--accent)"></i> Todas as funções abaixo estão inclusas no pacote fechado.</span>
+          <button class="check-all-btn" data-action="toggle-pkg" data-pkg="${pkgIdx}">Selecionar pacote</button>
+        </div>
+        <div class="features-grid">
+      `;
+      pkg.funcoes.forEach((f, fIdx) => {
+        html += `
+          <div class="feat" data-type="fix" data-pkg="${pkgIdx}" data-feat="${fIdx}">
+            <div class="feat-check"></div>
+            <div class="feat-content">
+              <div class="feat-name">${esc(f.n)}</div>
+              ${f.d ? `<div class="feat-desc">${esc(f.d)}</div>` : ''}
+            </div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+    } else if (pkg.tipo === 'escala' && pkg.funcoes.length > 0) {
+      html += `
+        <div class="scaled-info">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <div><strong>Preço escalonado:</strong> a cada ${pkg.porLote} itens selecionados, soma R$ ${brl(pkg.valor)} ao total. Fração arredonda para cima.</div>
+        </div>
+        <div class="features-grid">
+      `;
+      pkg.funcoes.forEach((f, fIdx) => {
+        html += `
+          <div class="feat" data-type="escala" data-pkg="${pkgIdx}" data-feat="${fIdx}">
+            <div class="feat-check"></div>
+            <div class="feat-content">
+              <div class="feat-name">${esc(f.n)}</div>
+              ${f.d ? `<div class="feat-desc">${esc(f.d)}</div>` : ''}
+            </div>
+            <div class="feat-badge">ESCALA</div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+    } else if (pkg.tipo === 'avulso') {
+      html += `<p style="color:var(--text-dim);font-size:14px;">Selecione os itens adicionais abaixo para montar seu pedido.</p>`;
+    }
+
+    html += `</div></div>`;
+  });
+
+  // Adicionais
+  if (car.adicionais && car.adicionais.length > 0) {
+    html += `
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-title-wrap">
+            <h3>Itens Adicionais</h3>
+            <p>Funções extras com preço individual — somadas ao pacote.</p>
+          </div>
+          <div class="package-price">
+            <div class="price" style="font-size:24px;color:var(--warn)"><i class="fa-solid fa-plus-circle"></i></div>
+            <div class="label">ADICIONAIS</div>
+          </div>
+        </div>
+        <div class="package-body">
+          <div class="features-grid">
+    `;
+    car.adicionais.forEach((a, aIdx) => {
+      const priceText = a.requerPacote
+        ? `R$ ${brl(a.valor)} com pacote · R$ ${brl(a.valorSozinho)} isolado`
+        : `R$ ${brl(a.valor)}`;
+      html += `
+        <div class="feat" data-type="add" data-add="${aIdx}">
+          <div class="feat-check"></div>
+          <div class="feat-content">
+            <div class="feat-name">${esc(a.n)}</div>
+            ${a.d ? `<div class="feat-desc">${esc(a.d)}</div>` : ''}
+            <div class="feat-price">+ ${priceText}</div>
+          </div>
+        </div>
+      `;
+    });
+    html += `</div></div></div>`;
+  }
+
+  resultMain.innerHTML = html;
+  attachFeatureListeners();
+}
+
+// Feature selection listeners
+function attachFeatureListeners() {
+  // Item clicks
+  resultMain.querySelectorAll('.feat').forEach(el => {
+    el.addEventListener('click', () => toggleFeature(el));
+  });
+  // "Select package" button
+  resultMain.querySelectorAll('[data-action="toggle-pkg"]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const pkgIdx = parseInt(el.dataset.pkg);
+      togglePackageAll(pkgIdx, el);
+    });
+  });
+}
+
+function toggleFeature(el) {
+  const type = el.dataset.type;
+  let key;
+  if (type === 'fix') {
+    key = `fix:${el.dataset.pkg}:${el.dataset.feat}`;
+  } else if (type === 'escala') {
+    key = `esc:${el.dataset.pkg}:${el.dataset.feat}`;
+  } else if (type === 'add') {
+    key = `add:${el.dataset.add}`;
+  }
+
+  if (state.selecoes.has(key)) {
+    state.selecoes.delete(key);
+    el.classList.remove('selected');
+  } else {
+    state.selecoes.set(key, { el });
+    el.classList.add('selected');
+  }
+  refreshSelectAllButtons();
+  updateSummary();
+}
+
+function togglePackageAll(pkgIdx, btn) {
+  const featEls = resultMain.querySelectorAll(`.feat[data-type="fix"][data-pkg="${pkgIdx}"]`);
+  // Check if all are selected
+  const allSelected = [...featEls].every(el => el.classList.contains('selected'));
+  featEls.forEach(el => {
+    const key = `fix:${el.dataset.pkg}:${el.dataset.feat}`;
+    if (allSelected) {
+      state.selecoes.delete(key);
+      el.classList.remove('selected');
+    } else {
+      state.selecoes.set(key, { el });
+      el.classList.add('selected');
+    }
+  });
+  refreshSelectAllButtons();
+  updateSummary();
+}
+
+function refreshSelectAllButtons() {
+  resultMain.querySelectorAll('[data-action="toggle-pkg"]').forEach(btn => {
+    const pkgIdx = btn.dataset.pkg;
+    const feats = resultMain.querySelectorAll(`.feat[data-type="fix"][data-pkg="${pkgIdx}"]`);
+    const allSel = feats.length > 0 && [...feats].every(el => el.classList.contains('selected'));
+    btn.textContent = allSel ? 'Remover pacote' : 'Selecionar pacote';
+    btn.classList.toggle('active', allSel);
+  });
+}
+
+// Summary calculation
+function updateSummary() {
+  const car = DADOS[state.brand][state.model];
+  let total = 0;
+  const lines = [];
+
+  // Track which fixed packages are activated
+  const packagesActivated = new Set();
+  car.pacotes.forEach((pkg, pkgIdx) => {
+    if (pkg.tipo === 'fixo') {
+      // Is any item of this package selected?
+      const anySelected = pkg.funcoes.some((_, fIdx) => state.selecoes.has(`fix:${pkgIdx}:${fIdx}`));
+      if (anySelected) {
+        packagesActivated.add(pkgIdx);
+        total += pkg.valor;
+        const selCount = pkg.funcoes.filter((_, fIdx) => state.selecoes.has(`fix:${pkgIdx}:${fIdx}`)).length;
+        lines.push({
+          nome: `${pkg.nome} <small style="opacity:.6">(${selCount}/${pkg.funcoes.length} funções)</small>`,
+          valor: pkg.valor,
+          pkg: true
+        });
+      }
+    } else if (pkg.tipo === 'escala') {
+      const selCount = pkg.funcoes.filter((_, fIdx) => state.selecoes.has(`esc:${pkgIdx}:${fIdx}`)).length;
+      if (selCount > 0) {
+        const lotes = Math.ceil(selCount / pkg.porLote);
+        const valor = pkg.valor * lotes;
+        total += valor;
+        lines.push({
+          nome: `${pkg.nome} <small style="opacity:.6">(${selCount} itens · ${lotes} lote${lotes>1?'s':''})</small>`,
+          valor,
+          pkg: true
+        });
+      }
+    }
+  });
+
+  // Additionals
+  (car.adicionais || []).forEach((a, aIdx) => {
+    if (state.selecoes.has(`add:${aIdx}`)) {
+      let v;
+      if (a.requerPacote) {
+        // if any fixed package is active, use preferential price
+        const hasFixedPkg = car.pacotes.some((p,i)=>p.tipo==='fixo' && packagesActivated.has(i));
+        v = hasFixedPkg ? a.valor : a.valorSozinho;
+      } else {
+        v = a.valor;
+      }
+      total += v;
+      lines.push({ nome: a.n, valor: v, pkg: false });
+    }
+  });
+
+  // Render summary
+  if (lines.length === 0) {
+    summaryBody.innerHTML = `
+      <div class="summary-empty">
+        <i class="fa-solid fa-list-check"></i>
+        <p>Selecione as funções desejadas e acompanhe o orçamento por aqui.</p>
+      </div>
+    `;
+    waBtn.disabled = true;
+    mobileFab.classList.remove('visible');
+  } else {
+    summaryBody.innerHTML = lines.map(l => `
+      <div class="summary-item ${l.pkg ? 'pkg' : ''}">
+        <div class="summary-item-name">${l.nome}</div>
+        <div class="summary-item-price">R$ ${brl(l.valor)}</div>
+      </div>
+    `).join('');
+    waBtn.disabled = false;
+    mobileFab.classList.add('visible');
+  }
+
+  totalValue.textContent = brl(total);
+  mobileTotal.textContent = brl(total);
+
+  const totalItens = state.selecoes.size;
+  totalCount.textContent = totalItens === 0 
+    ? 'Nenhum item selecionado' 
+    : `${totalItens} ${totalItens === 1 ? 'item selecionado' : 'itens selecionados'}`;
+}
+
+// Build WhatsApp message
+function buildWaMessage() {
+  const car = DADOS[state.brand][state.model];
+  let msg = `*Olá! Gostaria de um orçamento VAGCODING SP.*%0A%0A`;
+  msg += `*Veículo:* ${state.brand} — ${state.model}%0A%0A`;
+  msg += `*Funções selecionadas:*%0A`;
+
+  const packagesActivated = new Set();
+  car.pacotes.forEach((pkg, pkgIdx) => {
+    if (pkg.tipo === 'fixo') {
+      const selectedFeats = pkg.funcoes
+        .map((f, fIdx) => state.selecoes.has(`fix:${pkgIdx}:${fIdx}`) ? f : null)
+        .filter(Boolean);
+      if (selectedFeats.length > 0) {
+        packagesActivated.add(pkgIdx);
+        msg += `%0A📦 *${pkg.nome}* (R$ ${brl(pkg.valor)})%0A`;
+        selectedFeats.forEach(f => { msg += `  • ${f.n}%0A`; });
+      }
+    } else if (pkg.tipo === 'escala') {
+      const selectedFeats = pkg.funcoes
+        .map((f, fIdx) => state.selecoes.has(`esc:${pkgIdx}:${fIdx}`) ? f : null)
+        .filter(Boolean);
+      if (selectedFeats.length > 0) {
+        const lotes = Math.ceil(selectedFeats.length / pkg.porLote);
+        msg += `%0A📦 *${pkg.nome}* (${selectedFeats.length} itens · R$ ${brl(pkg.valor*lotes)})%0A`;
+        selectedFeats.forEach(f => { msg += `  • ${f.n}%0A`; });
+      }
+    }
+  });
+
+  const selAdditionals = (car.adicionais||[]).map((a,i)=>state.selecoes.has(`add:${i}`)?a:null).filter(Boolean);
+  if (selAdditionals.length > 0) {
+    msg += `%0A✨ *Adicionais:*%0A`;
+    selAdditionals.forEach(a => {
+      let v;
+      if (a.requerPacote) {
+        const hasFixedPkg = car.pacotes.some((p,i)=>p.tipo==='fixo' && packagesActivated.has(i));
+        v = hasFixedPkg ? a.valor : a.valorSozinho;
+      } else { v = a.valor; }
+      msg += `  • ${a.n} — R$ ${brl(v)}%0A`;
+    });
+  }
+
+  msg += `%0A💰 *Total estimado: R$ ${totalValue.textContent}*%0A%0A`;
+  msg += `Aguardo retorno para agendarmos. Obrigado!`;
+  return msg;
+}
+
+function openWa() {
+  const msg = buildWaMessage();
+  window.open(`https://wa.me/${CONTATO.whatsapp}?text=${msg}`, '_blank');
+}
+
+/* ============================================================
+   EVENT HANDLERS
+   ============================================================ */
+brandSelect.addEventListener('change', (e) => {
+  state.brand = e.target.value || null;
+  state.model = null;
+  state.selecoes.clear();
+
+  // Special case: BMW — show contact notice instead of normal flow
+  if (state.brand === 'BMW') {
+    modelSelect.innerHTML = '<option value="">— Orçamento sob consulta —</option>';
+    modelSelect.disabled = true;
+    renderBMWNotice();
+    resultWrap.classList.add('active');
+    // Hide the summary (no itemized budget for BMW)
+    document.getElementById('summary').style.display = 'none';
+    setTimeout(() => {
+      resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+    return;
+  }
+
+  // Normal flow
+  document.getElementById('summary').style.display = '';
+  populateModels(state.brand);
+  resultWrap.classList.remove('active');
+});
+
+modelSelect.addEventListener('change', (e) => {
+  state.model = e.target.value || null;
+  state.selecoes.clear();
+  const summaryEl = document.getElementById('summary');
+
+  if (!state.model) {
+    resultWrap.classList.remove('active');
+    return;
+  }
+
+  // Special case: "Not listed" option
+  if (state.model === '__not_listed__') {
+    renderNotListedNotice(state.brand);
+    summaryEl.style.display = 'none';
+    resultWrap.classList.add('active');
+    setTimeout(() => resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    return;
+  }
+
+  const car = DADOS[state.brand][state.model];
+
+  // Special case: Sob consulta (Porsche)
+  if (car && car.sobConsulta) {
+    renderSobConsultaNotice(state.brand, state.model, car);
+    summaryEl.style.display = 'none';
+    resultWrap.classList.add('active');
+    setTimeout(() => resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    return;
+  }
+
+  // Normal flow
+  summaryEl.style.display = '';
+  renderCar(state.brand, state.model);
+  resultWrap.classList.add('active');
+  updateSummary();
+  setTimeout(() => resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+});
+
+// Render notice when the user's car isn't in the list (Audi / VW)
+function renderNotListedNotice(brand) {
+  const waMsg = encodeURIComponent(`Olá! Tenho um ${brand} que não está na lista do site. Gostaria de consultar se vocês atendem o meu modelo.\n\n*Marca:* ${brand}\n*Modelo:* \n*Ano:* `);
+  resultMain.innerHTML = `
+    <div class="car-header" style="background:linear-gradient(135deg,rgba(255,45,45,.08),rgba(255,90,31,.04))">
+      <div class="car-brand"><i class="fa-solid fa-car"></i> ${esc(brand)}</div>
+      <h2 class="car-model">Carro fora da lista?</h2>
+      <p class="car-desc">Sem problema. Trabalhamos com praticamente toda a linha ${esc(brand)} do grupo VAG — inclusive versões e anos que não estão listados aqui no site. Mande um WhatsApp informando marca, modelo e ano e nós montamos o orçamento específico para o seu veículo.</p>
+    </div>
+
+    <div class="package-card featured">
+      <div class="package-header">
+        <div class="package-title-wrap">
+          <h3>Fale com a gente</h3>
+          <p>Resposta rápida pelo WhatsApp com a lista de funções disponíveis.</p>
+        </div>
+        <div class="package-price">
+          <div class="price" style="font-size:24px;color:var(--warn)"><i class="fa-solid fa-headset"></i></div>
+          <div class="label">SOB CONSULTA</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px" class="not-listed-grid">
+          <div class="feat" style="cursor:default">
+            <div class="feat-content">
+              <div class="feat-name"><span style="color:var(--accent);margin-right:6px">01</span>Envie marca, modelo e ano</div>
+              <div class="feat-desc">Com essas três informações conseguimos identificar os módulos do seu carro.</div>
+            </div>
+          </div>
+          <div class="feat" style="cursor:default">
+            <div class="feat-content">
+              <div class="feat-name"><span style="color:var(--accent);margin-right:6px">02</span>Receba a lista sob medida</div>
+              <div class="feat-desc">Montamos as funções de coding disponíveis e valores para o seu veículo.</div>
+            </div>
+          </div>
+          <div class="feat" style="cursor:default">
+            <div class="feat-content">
+              <div class="feat-name"><span style="color:var(--accent);margin-right:6px">03</span>Agendamos</div>
+              <div class="feat-desc">Atendimento em Campinas, a domicílio ou com nossos parceiros no Brasil.</div>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/5519999801171?text=${waMsg}" target="_blank" rel="noopener" class="btn btn-wa" style="width:100%;justify-content:center;font-size:15px;padding:16px">
+          <i class="fa-brands fa-whatsapp"></i> Consultar meu ${esc(brand)}
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+// Render notice for "sob consulta" cars (Porsche)
+function renderSobConsultaNotice(brand, model, car) {
+  const waMsg = encodeURIComponent(`Olá! Gostaria de um orçamento de coding para o meu ${brand}.\n\n*Marca:* ${brand}\n*Modelo:* \n*Ano:* `);
+  let servicosHtml = '';
+  if (car.servicosInformativos && car.servicosInformativos.length > 0) {
+    servicosHtml = `
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-title-wrap">
+            <h3>Serviços disponíveis</h3>
+            <p>Seleção dos coding e desbloqueios mais pedidos para ${esc(brand)}. Valores variam conforme modelo, ano e versão do software.</p>
+          </div>
+          <div class="package-price">
+            <div class="price" style="font-size:24px;color:var(--warn)"><i class="fa-solid fa-list-check"></i></div>
+            <div class="label">INFORMATIVO</div>
+          </div>
+        </div>
+        <div class="package-body">
+          <div class="features-grid">
+            ${car.servicosInformativos.map(s => `
+              <div class="feat" style="cursor:default;border-color:var(--line)">
+                <div class="feat-content" style="padding-left:2px">
+                  <div class="feat-name">${esc(s.n)}</div>
+                  ${s.d ? `<div class="feat-desc">${esc(s.d)}</div>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  resultMain.innerHTML = `
+    <div class="car-header" style="background:linear-gradient(135deg,rgba(255,45,45,.08),rgba(255,90,31,.04))">
+      <div class="car-brand"><i class="fa-solid fa-car"></i> ${esc(brand)}</div>
+      <h2 class="car-model">${esc(model)}</h2>
+      <p class="car-desc">${esc(car.descricao)}</p>
+    </div>
+
+    <div class="package-card featured">
+      <div class="package-header">
+        <div class="package-title-wrap">
+          <h3>Orçamento personalizado</h3>
+          <p>Cada Porsche tem particularidades conforme a versão do software da multimídia.</p>
+        </div>
+        <div class="package-price">
+          <div class="price" style="font-size:24px;color:var(--warn)"><i class="fa-solid fa-message"></i></div>
+          <div class="label">SOB CONSULTA</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <p style="color:var(--text-dim);font-size:14px;margin-bottom:18px;line-height:1.6">Para receber o valor exato do coding e desbloqueios disponíveis para o seu veículo, entre em contato enviando <strong style="color:var(--text)">nome, modelo e ano do veículo</strong>. Respondemos rapidamente com a lista de funções compatíveis e os valores.</p>
+        <a href="https://wa.me/5519999801171?text=${waMsg}" target="_blank" rel="noopener" class="btn btn-wa" style="width:100%;justify-content:center;font-size:15px;padding:16px">
+          <i class="fa-brands fa-whatsapp"></i> Solicitar orçamento no WhatsApp
+        </a>
+      </div>
+    </div>
+
+    ${servicosHtml}
+  `;
+}
+
+// Render special notice for BMW
+function renderBMWNotice() {
+  resultMain.innerHTML = `
+    <div class="car-header" style="background:linear-gradient(135deg,rgba(255,45,45,.08),rgba(255,90,31,.04))">
+      <div class="car-brand"><i class="fa-solid fa-car"></i> BMW</div>
+      <h2 class="car-model">Orçamento sob consulta</h2>
+      <p class="car-desc">Também realizamos coding em BMW. Como cada chassi tem particularidades conforme modelo, ano e versão, o orçamento é montado caso a caso — com base no que é realmente compatível com o seu veículo.</p>
+    </div>
+
+    <div class="package-card featured">
+      <div class="package-header">
+        <div class="package-title-wrap">
+          <h3>Como funciona</h3>
+          <p>Processo rápido e sem compromisso.</p>
+        </div>
+        <div class="package-price">
+          <div class="price" style="font-size:24px;color:var(--warn)"><i class="fa-solid fa-message"></i></div>
+          <div class="label">SOB CONSULTA</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px">
+          <div class="feat" style="cursor:default">
+            <div class="feat-content">
+              <div class="feat-name"><span style="color:var(--accent);margin-right:6px">01</span>Envie o chassi</div>
+              <div class="feat-desc">Mande o número completo do chassi do seu BMW pelo WhatsApp.</div>
+            </div>
+          </div>
+          <div class="feat" style="cursor:default">
+            <div class="feat-content">
+              <div class="feat-name"><span style="color:var(--accent);margin-right:6px">02</span>Receba as opções</div>
+              <div class="feat-desc">Montamos a lista de funções disponíveis + valores para o seu modelo específico.</div>
+            </div>
+          </div>
+          <div class="feat" style="cursor:default">
+            <div class="feat-content">
+              <div class="feat-name"><span style="color:var(--accent);margin-right:6px">03</span>Agendamos o serviço</div>
+              <div class="feat-desc">Você escolhe as funções e marcamos o dia para o atendimento.</div>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/5519999801171?text=${encodeURIComponent('Olá! Tenho um BMW e gostaria do orçamento de coding.%0A%0A*Chassi:* ').replace(/%0A/g,'%0A')}" target="_blank" rel="noopener" class="btn btn-wa" style="width:100%;justify-content:center;font-size:15px;padding:16px">
+          <i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp com o chassi
+        </a>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:20px;color:var(--text-muted);font-size:13px;font-family:var(--font-mono);letter-spacing:.5px">
+      <i class="fa-solid fa-circle-info" style="color:var(--accent);margin-right:6px"></i>
+      Atendimento BMW também cobre ativação de Video in Motion, CarPlay sem fio, faróis adaptativos, M Performance e mais.
+    </div>
+  `;
+}
+
+waBtn.addEventListener('click', openWa);
+mobileWa.addEventListener('click', openWa);
+
+// Init
+populateBrands();
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav');
+  if (window.scrollY > 30) {
+    nav.style.background = 'rgba(10,11,13,.95)';
+  } else {
+    nav.style.background = 'rgba(10,11,13,.7)';
+  }
+});
+</script>
+</body>
+</html>
